@@ -19,7 +19,7 @@ export const Container = styled.div`
     > div {
       color: black;
     }
-    @media (max-width: 1300px) {
+    @media (max-width: 1150px) {
       > div {
         border: 2px solid;
         border-image-slice: 1;
@@ -50,7 +50,6 @@ export const Container = styled.div`
       }
     }
     .search-container {
-      margin-left: 3rem;
       position: relative;
       .search-icon {
         position: absolute;
@@ -63,7 +62,7 @@ export const Container = styled.div`
       input {
         padding-left: 2.75rem;
       }
-      @media (max-width: 1060px) {
+      @media (max-width: 860px) {
         .search-icon {
           border: 3px solid #777;
           border-radius: 10rem;
@@ -91,7 +90,7 @@ export const Container = styled.div`
     margin-right: 1.5rem;
   }
 
-  .hamburger-menu {
+  .hamburger-menu-icon {
     display: none;
     .bars-icon {
       font-size: 2rem;
@@ -100,7 +99,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 550px) {
     height: 4rem;
 
     .login-register,
@@ -116,9 +115,180 @@ export const Container = styled.div`
       }
     }
 
-    .hamburger-menu {
+    .hamburger-menu-icon {
       display: flex;
       align-content: center;
+      z-index: 100;
+      .bars-container {
+        > * {
+          height: 0.25rem;
+          width: 2rem;
+          background-color: black;
+          margin: 0.4125rem 0;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        > div.bars-container__bar:nth-child(1) {
+          margin-top: 0;
+        }
+
+        > div.bars-container__bar:nth-child(3) {
+          margin-bottom: 0;
+        }
+
+        @keyframes rotateTopBar {
+          from {
+            transform: rotateZ(0deg) translateX(0) translateY(0);
+            background-color: #000000;
+          }
+          100% {
+            transform: rotateZ(45deg) translateX(0.5rem) translateY(0.5rem);
+            background-color: #ffffff;
+          }
+        }
+
+        @keyframes fadeOutBar {
+          from {
+            opacity: 1;
+            background-color: #000000;
+          }
+          to {
+            opacity: 0;
+            background-color: #ffffff;
+          }
+        }
+
+        @keyframes rotateBottomBar {
+          from {
+            transform: rotateZ(0deg) translateX(0) translateY(0);
+            background-color: #000000;
+          }
+          100% {
+            transform: rotateZ(-45deg) translateX(0.5rem) translateY(-0.5rem);
+            background-color: #ffffff;
+          }
+        }
+
+        @keyframes rotateTopBarReverse {
+          from {
+            transform: rotateZ(45deg) translateX(0.5rem) translateY(0.5rem);
+            background-color: #ffffff;
+          }
+          to {
+            transform: rotateZ(0deg) translateX(0) translateY(0);
+            background-color: #000000;
+          }
+        }
+
+        @keyframes fadeInBar {
+          from {
+            opacity: 0;
+            background-color: #ffffff;
+          }
+          to {
+            opacity: 1;
+            background-color: #000000;
+          }
+        }
+
+        @keyframes rotateBottomBarReverse {
+          from {
+            transform: rotateZ(-45deg) translateX(0.5rem) translateY(-0.5rem);
+            background-color: #ffffff;
+          }
+          to {
+            transform: rotateZ(0deg) translateX(0) translateY(0);
+            background-color: #000000;
+          }
+        }
+
+        &[class*="animate"] {
+          > * {
+            animation-duration: 0.25s;
+          }
+        }
+
+        &[class*="menu-opened"] {
+          > * {
+            animation-fill-mode: forwards;
+          }
+
+          > div.bars-container__bar:nth-child(1) {
+            animation-name: rotateTopBar;
+          }
+
+          > div.bars-container__bar:nth-child(2) {
+            animation-name: fadeOutBar;
+          }
+
+          > div.bars-container__bar:nth-child(3) {
+            animation-name: rotateBottomBar;
+          }
+        }
+
+        &[class*="menu-closed"] {
+          > * {
+            animation-fill-mode: forwards;
+          }
+          > div.bars-container__bar:nth-child(1) {
+            animation-name: rotateTopBarReverse;
+          }
+
+          > div.bars-container__bar:nth-child(2) {
+            animation-name: fadeInBar;
+          }
+
+          > div.bars-container__bar:nth-child(3) {
+            animation-name: rotateBottomBarReverse;
+          }
+        }
+      }
+    }
+  }
+
+  .search-menu {
+    position: absolute;
+    background-color: ${props => props.theme.colors.primary};
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .mobile-hamburger-menu {
+    position: absolute;
+    background-color: ${props => props.theme.colors.primary};
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    &__link {
+      color: white;
+      font-size: 3rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      &:visited {
+        color: white;
+      }
+    }
+
+    &__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      color: white;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 `;
