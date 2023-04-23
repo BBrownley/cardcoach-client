@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   height: 100px;
   /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25); */
-  padding: 0.75rem;
+  /* padding: 0.75rem; */
   display: flex;
   justify-content: space-between;
   overflow: hidden;

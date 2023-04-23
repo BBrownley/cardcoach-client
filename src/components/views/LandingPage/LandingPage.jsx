@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Hero } from "./Hero.elements";
 import { Wrapper } from "../../reusable/Wrapper.elements";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRightLong,
+  faSquareRootVariable,
+  faFlaskVial,
+  faGlobeAmericas
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function LandingPage() {
   return (
@@ -25,9 +30,19 @@ export default function LandingPage() {
               </button>
             </div>
           </div>
-          <div className="hero-image-wrapper">
-            <div className="hero-image">
-              Lorem ipsum dolor sit amet aq r rtarf awr awrawr
+
+          <div className="hero-image">
+            <div className="card-1 animate">
+              <FontAwesomeIcon
+                icon={faSquareRootVariable}
+                className="card-icon"
+              />
+            </div>
+            <div className="card-2 animate">
+              <FontAwesomeIcon icon={faFlaskVial} className="card-icon" />
+            </div>
+            <div className="card-3 animate">
+              <FontAwesomeIcon icon={faGlobeAmericas} className="card-icon" />
             </div>
           </div>
         </Hero>
