@@ -150,7 +150,7 @@ export const Container = styled.div`
     .hamburger-menu-icon {
       display: flex;
       align-content: center;
-      z-index: 100;
+      z-index: 1001;
       .bars-container {
         > * {
           height: 0.25rem;
@@ -300,7 +300,7 @@ export const Container = styled.div`
     right: 0;
 
     height: 6.25rem;
-    z-index: 200;
+    z-index: 2000;
 
     animation: open-search-dropdown 0.5s;
 
@@ -327,6 +327,7 @@ export const Container = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 1000;
 
     display: flex;
     flex-direction: column;

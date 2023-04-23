@@ -14,7 +14,7 @@ import {
 export default function LandingPage() {
   return (
     <div>
-      <Wrapper className="m-top">
+      <Wrapper className="m-top m-bottom">
         <Hero>
           <div className="hero-body-wrapper">
             <div className="hero-body">

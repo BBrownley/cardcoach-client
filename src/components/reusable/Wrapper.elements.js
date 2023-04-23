@@ -8,4 +8,8 @@ export const Wrapper = styled.div`
   &[class*="m-top"] {
     margin-top: 10rem;
   }
+
+  &[class*="m-bottom"] {
+    margin-bottom: 10rem;
+  }
 `;

@@ -165,4 +165,85 @@ export const Hero = styled.div`
       animation: card-3-anim 1s cubic-bezier(0.4, 0, 0.6, 1);
     }
   }
+
+  /* places img behind hero text */
+  @media (max-width: 1000px) {
+    .hero-body {
+      position: relative;
+      text-align: center;
+      font-weight: bold;
+
+      .btn {
+        margin: 2rem auto 0 auto;
+      }
+    }
+
+    @keyframes card-1-anim-mobile {
+      0% {
+        opacity: 0;
+        transform: translate(35%, -65%);
+      }
+      100% {
+        opacity: 0.15;
+        transform: translate(-65%, -65%);
+      }
+    }
+
+    @keyframes card-2-anim-mobile {
+      0% {
+        opacity: 0;
+        transform: translate(50%, -50%);
+      }
+      25% {
+        opacity: 0;
+        transform: translate(50%, -50%);
+      }
+      100% {
+        opacity: 0.15;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    @keyframes card-3-anim-mobile {
+      0% {
+        opacity: 0;
+        transform: translate(65%, -35%);
+      }
+      50% {
+        opacity: 0;
+        transform: translate(65%, -35%);
+      }
+      100% {
+        opacity: 0.15;
+        transform: translate(-35%, -35%);
+      }
+    }
+
+    .hero-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: -1;
+      transform: translate(-50%, -50%) scale(2);
+      > * {
+        opacity: 0.15;
+      }
+
+      .card-1 {
+        animation-name: card-1-anim-mobile;
+      }
+
+      .card-2 {
+        animation-name: card-2-anim-mobile;
+      }
+
+      .card-3 {
+        animation-name: card-3-anim-mobile;
+
+        .card-icon {
+          display: none;
+        }
+      }
+    }
+  }
 `;
