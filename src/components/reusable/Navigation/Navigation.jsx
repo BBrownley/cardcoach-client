@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 import { Container } from "./Navigation.elements";
+import { Wrapper } from "../Wrapper.elements";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faBars, faClose } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import StyledLink from "../elements.elements";
 
@@ -25,10 +25,14 @@ export default function Navigation() {
         setAnimateHBGMenuIcon(false);
         setHamburgerMenuOpen(false);
       }
+
+      if (deviceWidth > 940) {
+        setSearchMenuOpen(false);
+      }
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize); // cleanup fcn
-  });
+  }, [deviceWidth]);
 
   function openSearchMobile() {
     setSearchMenuOpen(true);
@@ -44,76 +48,82 @@ export default function Navigation() {
   }
 
   function closeMenuMobile() {
-    console.log("hiya");
     setHamburgerMenuOpen(false);
   }
 
   return (
-    <Container>
-      <StyledLink className="branding">
-        <div>
-          <span className="clr-primary">C</span>
-          <span className="branding-blk-text">ard</span>
-          <span className="clr-primary">C</span>
-          <span className="branding-blk-text">oach</span>
+    <Wrapper>
+      <Container>
+        <StyledLink className="branding">
+          <div>
+            <span className="clr-primary">C</span>
+            <span className="branding-blk-text">ard</span>
+            <span className="clr-primary">C</span>
+            <span className="branding-blk-text">oach</span>
+          </div>
+        </StyledLink>
+        <div className="nav-search">
+          <div className="search-container">
+            <FontAwesomeIcon
+              icon={faSearch}
+              className="search-icon"
+              onClick={openSearchMobile}
+              aria-label="open search menu"
+            />
+            <input
+              type="text"
+              placeholder="What would you like to study today?"
+              id="search"
+            ></input>
+          </div>
         </div>
-      </StyledLink>
-      <div className="nav-links">
-        <div className="search-container">
-          <FontAwesomeIcon
-            icon={faSearch}
-            className="search-icon"
-            onClick={openSearchMobile}
-          />
-          <input
-            type="text"
-            placeholder="What would you like to study today?"
-            id="search"
-          ></input>
+        <div className="login-register">
+          <button className="btn btn-secondary">Login</button>
+          <button className="btn btn-primary">Register</button>
         </div>
-      </div>
-      <div className="login-register">
-        <button className="btn btn-secondary">Login</button>
-        <button className="btn btn-primary">Register</button>
-      </div>
-      <div className="hamburger-menu-icon">
+        <div className="hamburger-menu-icon" aria-label="menu">
+          <div
+            className={`
+              bars-container 
+              ${hamburgerMenuOpen ? "menu-opened" : "menu-closed"} 
+              ${animateHBGMenuIcon && "animate"}
+            `}
+            onClick={hamburgerMenuOpen ? closeMenuMobile : openMenuMobile}
+          >
+            <div className="bars-container__bar"></div>
+            <div className="bars-container__bar"></div>
+            <div className="bars-container__bar"></div>
+          </div>
+        </div>
         <div
-          className={`bars-container 
-          ${hamburgerMenuOpen ? "menu-opened" : "menu-closed"} 
-          ${animateHBGMenuIcon && "animate"}`}
-          onClick={hamburgerMenuOpen ? closeMenuMobile : openMenuMobile}
+          className="search-dropdown"
+          style={{ display: searchMenuOpen ? "block" : "none" }}
         >
-          <div className="bars-container__bar"></div>
-          <div className="bars-container__bar"></div>
-          <div className="bars-container__bar"></div>
+          <p>Search component</p>
+          <p onClick={closeSearchMobile} aria-label="close search menu">
+            close
+          </p>
         </div>
-      </div>
-      <div
-        className="search-menu"
-        style={{ display: searchMenuOpen ? "block" : "none" }}
-      >
-        <p>Search component</p>
-        <p onClick={closeSearchMobile}>close</p>
-      </div>
-      <div
-        className="mobile-hamburger-menu"
-        style={{ display: hamburgerMenuOpen ? "flex" : "none" }}
-      >
-        <StyledLink className="mobile-hamburger-menu__link" to="/search">
-          Search Sets
-        </StyledLink>
-        <StyledLink className="mobile-hamburger-menu__link" to="/login">
-          Log in
-        </StyledLink>
-        <StyledLink className="mobile-hamburger-menu__link" to="/register">
-          Register
-        </StyledLink>
-        {/* <FontAwesomeIcon
-          icon={faClose}
-          className="mobile-hamburger-menu__close"
-          onClick={closeMenuMobile}
-        /> */}
-      </div>
-    </Container>
+        <div
+          className="mobile-hamburger-menu"
+          style={{ display: hamburgerMenuOpen ? "flex" : "none" }}
+        >
+          <StyledLink
+            className="mobile-hamburger-menu__link"
+            to="/login"
+            key="/login"
+          >
+            Log in
+          </StyledLink>
+          <StyledLink
+            className="mobile-hamburger-menu__link"
+            to="/register"
+            key="/register"
+          >
+            Register
+          </StyledLink>
+        </div>
+      </Container>
+    </Wrapper>
   );
 }

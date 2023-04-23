@@ -29,6 +29,10 @@ const Container = styled.div`
       color: black;
     }
   }
+
+  .clr-primary {
+    color: ${props => props.theme.colors.primary};
+  }
 `;
 
 const baseEl = (

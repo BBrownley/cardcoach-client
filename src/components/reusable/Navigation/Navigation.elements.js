@@ -2,10 +2,24 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height: 100px;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25); */
   padding: 0.75rem;
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
+
+  /* box-shadow below nav */
+  &::after {
+    content: " ";
+    height: 100px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: -1;
+  }
 
   > * {
     /* border: 1px solid black; */
@@ -19,6 +33,7 @@ export const Container = styled.div`
     > div {
       color: black;
     }
+    /* condense branding into smaller icon */
     @media (max-width: 1150px) {
       > div {
         border: 2px solid;
@@ -36,11 +51,7 @@ export const Container = styled.div`
     }
   }
 
-  .clr-primary {
-    color: ${props => props.theme.colors.primary};
-  }
-
-  .nav-links {
+  .nav-search {
     display: flex;
     align-items: center;
     > * {
@@ -62,7 +73,8 @@ export const Container = styled.div`
       input {
         padding-left: 2.75rem;
       }
-      @media (max-width: 860px) {
+      /* replace search input with search icon, used to open a search menu */
+      @media (max-width: 940px) {
         .search-icon {
           border: 3px solid #777;
           border-radius: 10rem;
@@ -99,13 +111,33 @@ export const Container = styled.div`
     }
   }
 
+  /* removes login/register btns, places them in hamburger menu */
   @media (max-width: 550px) {
     height: 4rem;
 
-    .login-register,
-    .nav-links {
+    /* box-shadow below nav */
+    &::after {
+      content: " ";
+      height: 4rem;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
+
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
+
+    .login-register {
       display: none;
     }
+
+    .nav-search {
+      position: absolute;
+      right: 6rem;
+      top: 0.6875rem;
+    }
+
     .branding {
       > div {
         border: none;
@@ -249,13 +281,43 @@ export const Container = styled.div`
     }
   }
 
-  .search-menu {
+  @keyframes open-search-dropdown {
+    from {
+      opacity: 0;
+      top: -50px;
+    }
+    to {
+      opacity: 1;
+      top: 0px;
+    }
+  }
+
+  .search-dropdown {
     position: absolute;
-    background-color: ${props => props.theme.colors.primary};
+    background-color: rgba(255, 255, 255, 1);
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+
+    height: 6.25rem;
+    z-index: 200;
+
+    animation: open-search-dropdown 0.5s;
+
+    @media (max-width: 550px) {
+      height: 4rem;
+    }
+  }
+
+  @keyframes open-mobile-menu {
+    from {
+      opacity: 0;
+      left: 200px;
+    }
+    to {
+      opacity: 1;
+      left: 0px;
+    }
   }
 
   .mobile-hamburger-menu {
@@ -269,6 +331,9 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
+    animation: open-mobile-menu;
+    animation-duration: 0.5s;
 
     &__link {
       color: white;
