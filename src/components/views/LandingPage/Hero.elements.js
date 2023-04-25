@@ -3,9 +3,11 @@ import styled from "styled-components";
 export const Hero = styled.div`
   color: black;
   font-size: 2.5rem;
-  /* border: 1px solid #ccc; */
+  min-height: 100vh;
+  margin-top: -3rem; /* keep content towards center */
 
   display: flex;
+  align-items: center;
 
   /* make both children equal width */
   > * {
@@ -171,7 +173,6 @@ export const Hero = styled.div`
     .hero-body {
       position: relative;
       text-align: center;
-      font-weight: bold;
 
       .btn {
         margin: 2rem auto 0 auto;
@@ -220,6 +221,7 @@ export const Hero = styled.div`
     }
 
     .hero-image {
+      display: none;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -239,11 +241,16 @@ export const Hero = styled.div`
 
       .card-3 {
         animation-name: card-3-anim-mobile;
-
+        border: 0.25rem solid #888;
         .card-icon {
           display: none;
         }
       }
     }
+  }
+
+  /* shift body text up slightly to prevent overlap with card border from img */
+  @media (max-width: 550px) {
+    margin-top: -1rem;
   }
 `;

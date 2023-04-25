@@ -12,6 +12,7 @@ html {
 
 body {
   background-color: #fff;
+  overflow-x: hidden;
 }
 
 body,
@@ -61,4 +62,14 @@ input {
   font-size: 1.25rem;
   font-weight: bold;
   font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: bold;
 }
