@@ -50,7 +50,7 @@ export default function LandingPage() {
         <Hero>
           <div className="hero-body-wrapper">
             <div className="hero-body">
-              <span className="clr-primary">CardCoach</span> is a simple and
+              <span className="clr-primary">ardCoach</span> is a simple and
               user-friendly flashcard app that helps users easily create and
               study custom flashcards on any topic.
               <button className="btn btn-primary">
