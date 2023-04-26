@@ -1,10 +1,25 @@
 import styled from "styled-components";
 
+import { Wrapper } from "../../reusable/Wrapper.elements";
+
 export const Hero = styled.div`
-  color: black;
+  .hero-bkg {
+    position: absolute;
+    z-index: -1;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    image {
+      height: calc(100vh - 100px);
+      width: 300vw;
+    }
+  }
+`;
+
+export const HeroWrapper = styled(Wrapper)`
+  color: white;
   font-size: 2.5rem;
   min-height: 100vh;
-  margin-top: -3rem; /* keep content towards center */
 
   display: flex;
   align-items: center;
@@ -46,6 +61,11 @@ export const Hero = styled.div`
       transform: translateY(0);
       opacity: 1;
     }
+  }
+
+  .hero-body,
+  .hero-image {
+    margin-top: -18rem;
   }
 
   .hero-body {
@@ -247,10 +267,5 @@ export const Hero = styled.div`
         }
       }
     }
-  }
-
-  /* shift body text up slightly to prevent overlap with card border from img */
-  @media (max-width: 550px) {
-    margin-top: -1rem;
   }
 `;

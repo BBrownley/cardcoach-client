@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { Hero } from "./Hero.elements";
+import { Hero, HeroWrapper } from "./Hero.elements";
 import { Features } from "./Features.elements";
 import { Wrapper } from "../../reusable/Wrapper.elements";
 
@@ -15,6 +15,8 @@ import {
   faPeopleGroup,
   faLightbulb
 } from "@fortawesome/free-solid-svg-icons";
+
+import heroBkg from "../../../assets/svg/wave-haikei.svg";
 
 export default function LandingPage() {
   const featuresRef = useRef(null);
@@ -46,13 +48,17 @@ export default function LandingPage() {
 
   return (
     <div>
-      <Wrapper>
-        <Hero>
+      <Hero>
+        <HeroWrapper>
+          <svg className="hero-bkg">
+            <image href={heroBkg} preserveAspectRatio="none" />
+          </svg>
+
           <div className="hero-body-wrapper">
             <div className="hero-body">
-              <span className="clr-primary">ardCoach</span> is a simple and
-              user-friendly flashcard app that helps users easily create and
-              study custom flashcards on any topic.
+              <span>CardCoach</span> is a simple and user-friendly flashcard app
+              that helps users easily create and study custom flashcards on any
+              topic.
               <button className="btn btn-primary">
                 Let's start!{" "}
                 <FontAwesomeIcon
@@ -77,10 +83,10 @@ export default function LandingPage() {
               <FontAwesomeIcon icon={faGlobeAmericas} className="card-icon" />
             </div>
           </div>
-        </Hero>
-      </Wrapper>
+        </HeroWrapper>
+      </Hero>
 
-      <Wrapper>
+      <Wrapper className="m-top">
         <Features
           ref={featuresRef}
           className={`${featuresVisible ? "animate" : "hidden"}`}
