@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { Hero, HeroWrapper } from "./Hero.elements";
 import { Features, FeaturesWrapper } from "./Features.elements";
-import { Wrapper } from "../../reusable/Wrapper.elements";
+import { WhyUs, WhyUsWrapper } from "./WhyUs.elements";
+import { SignUp } from "./SignUp.elements";
+import StyledLink from "../../reusable/elements.elements";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -29,7 +31,12 @@ export default function LandingPage() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         // ([entry]) gets the first element (array destructuring)
-        setFeaturesVisible(featuresVisible || entry.isIntersecting);
+
+        if (entry.isIntersecting) {
+          setFeaturesVisible(true);
+        }
+
+        console.table(featuresVisible, entry.isIntersecting);
       },
       {
         root: null, // element used to check for visibility. null -> default to viewport
@@ -44,7 +51,12 @@ export default function LandingPage() {
       // sort of like attaching an eventListener to featuresRef
       observer.observe(featuresRef.current);
     }
-  }, [featuresRef, featuresVisible]);
+
+    return () => {
+      // Clean up the observer when the component is unmounted
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <div>
@@ -149,6 +161,47 @@ export default function LandingPage() {
           </div>
         </FeaturesWrapper>
       </Features>
+
+      <WhyUs>
+        <WhyUsWrapper>
+          <h2>Why CardCoach?</h2>
+          <div className="main-content">
+            <div className="description">
+              <span className="clr-primary"></span>
+              CardCoach is a unique study tool that offers several advantages
+              over traditional note-taking methods. Unlike notes, CardCoach
+              helps users retain information more effectively by using a{" "}
+              <span className="clr-primary">
+                spaced repetition algorithm that optimizes learning
+              </span>
+              . The platform also offers interactive features such as{" "}
+              <span className="clr-primary">
+                flashcards, quizzes, and progress tracking
+              </span>{" "}
+              to keep users engaged and motivated. Additionally, CardCoach
+              allows users to easily share their decks with friends or
+              classmates, making it an ideal tool for{" "}
+              <span className="clr-primary">collaborative studying</span>. With
+              its intuitive interface and customizable settings, CardCoach is an
+              efficient and effective way to study and learn. Whether you're
+              preparing for an exam or simply seeking to deepen your knowledge
+              on a subject, CardCoach can help you{" "}
+              <span className="clr-primary">
+                achieve your learning goals with ease
+              </span>
+              .
+            </div>
+            <div className="studying-image"></div>
+          </div>
+        </WhyUsWrapper>
+      </WhyUs>
+
+      <SignUp>
+        <StyledLink to="/register" className="signup-cta__link">
+          Sign up
+        </StyledLink>{" "}
+        for CardCoach today and start acing your exams!
+      </SignUp>
     </div>
   );
 }

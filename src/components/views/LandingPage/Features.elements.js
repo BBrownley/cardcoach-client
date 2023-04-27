@@ -4,6 +4,7 @@ import { Wrapper } from "../../reusable/Wrapper.elements";
 
 export const Features = styled.div`
   background-color: ${props => props.theme.colors.primary};
+  padding-bottom: 10rem;
 `;
 
 export const FeaturesWrapper = styled(Wrapper)`
