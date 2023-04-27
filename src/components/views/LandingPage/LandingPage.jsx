@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import { Hero, HeroWrapper } from "./Hero.elements";
-import { Features } from "./Features.elements";
+import { Features, FeaturesWrapper } from "./Features.elements";
 import { Wrapper } from "../../reusable/Wrapper.elements";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -56,9 +56,9 @@ export default function LandingPage() {
 
           <div className="hero-body-wrapper">
             <div className="hero-body">
-              <span>CardCoach</span> is a simple and user-friendly flashcard app
-              that helps users easily create and study custom flashcards on any
-              topic.
+              <span class="clr-primary">CardCoach</span> is a simple and
+              user-friendly flashcard app that helps users easily create and
+              study custom flashcards on any topic.
               <button className="btn btn-primary">
                 Let's start!{" "}
                 <FontAwesomeIcon
@@ -86,8 +86,8 @@ export default function LandingPage() {
         </HeroWrapper>
       </Hero>
 
-      <Wrapper className="m-top">
-        <Features
+      <Features>
+        <FeaturesWrapper
           ref={featuresRef}
           className={`${featuresVisible ? "animate" : "hidden"}`}
         >
@@ -147,45 +147,8 @@ export default function LandingPage() {
               </p>
             </div>
           </div>
-        </Features>
-      </Wrapper>
+        </FeaturesWrapper>
+      </Features>
     </div>
   );
 }
-
-// import { useState, useEffect, useRef } from 'react';
-
-// function MyComponent() {
-//   const elementRef = useRef(null);
-//   const [isVisible, setIsVisible] = useState(false);
-
-//   useEffect(() => {
-//     const observer = new IntersectionObserver(
-//       ([entry]) => {
-//         setIsVisible(entry.isIntersecting);
-//       },
-//       {
-//         root: null,
-//         rootMargin: '0px',
-//         threshold: 0.5,
-//       }
-//     );
-//     if (elementRef.current) {
-//       observer.observe(elementRef.current);
-//     }
-//     return () => {
-//       if (elementRef.current) {
-//         observer.unobserve(elementRef.current);
-//       }
-//     };
-//   }, [elementRef]);
-
-//   return (
-//     <div
-//       ref={elementRef}
-//       className={`my-element ${isVisible ? 'is-visible' : ''}`}
-//     >
-
-//     </div>
-//   );
-// }

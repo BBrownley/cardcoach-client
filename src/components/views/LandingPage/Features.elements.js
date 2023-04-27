@@ -1,6 +1,14 @@
 import styled from "styled-components";
 
+import { Wrapper } from "../../reusable/Wrapper.elements";
+
 export const Features = styled.div`
+  background-color: ${props => props.theme.colors.primary};
+`;
+
+export const FeaturesWrapper = styled(Wrapper)`
+  color: white;
+
   @keyframes fade-up {
     from {
       opacity: 0;
@@ -60,13 +68,14 @@ export const Features = styled.div`
       opacity: 0;
       position: relative;
       flex-basis: 48%;
+
       h3 {
-        color: ${props => props.theme.colors.primary};
+        /* color: ${props => props.theme.colors.primary}; */
         line-height: 3.5rem;
 
         .feature-icon {
           position: absolute;
-          color: black;
+          color: white;
           margin-right: 1.5rem;
           font-size: 3rem;
         }

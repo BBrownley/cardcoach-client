@@ -4,20 +4,21 @@ import { Wrapper } from "../../reusable/Wrapper.elements";
 
 export const Hero = styled.div`
   .hero-bkg {
+    margin-top: 1rem;
     position: absolute;
     z-index: -1;
     height: 100vh;
     width: 100vw;
     left: 0;
     image {
-      height: calc(100vh - 100px);
+      height: calc(100vh);
       width: 300vw;
     }
   }
 `;
 
 export const HeroWrapper = styled(Wrapper)`
-  color: white;
+  color: black;
   font-size: 2.5rem;
   min-height: 100vh;
 
@@ -65,7 +66,7 @@ export const HeroWrapper = styled(Wrapper)`
 
   .hero-body,
   .hero-image {
-    margin-top: -18rem;
+    margin-top: -25rem;
   }
 
   .hero-body {
