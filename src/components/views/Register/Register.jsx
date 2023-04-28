@@ -7,6 +7,8 @@ import { Container } from "./Register.elements";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 
+import userService from "../../../services/users";
+
 export default function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -26,6 +28,7 @@ export default function Register() {
     if (valid) {
       // TODO: submit form data to server
       console.log("registration valid");
+      userService.register();
     }
   };
 
