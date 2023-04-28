@@ -66,19 +66,14 @@ export default function LandingPage() {
             <image href={heroBkg} preserveAspectRatio="none" />
           </svg>
 
-          <div className="hero-body-wrapper">
-            <div className="hero-body">
-              <span class="clr-primary">CardCoach</span> is a simple and
-              user-friendly flashcard app that helps users easily create and
-              study custom flashcards on any topic.
-              <button className="btn btn-primary">
-                Let's start!{" "}
-                <FontAwesomeIcon
-                  icon={faArrowRightLong}
-                  className="btn__arrow"
-                />
-              </button>
-            </div>
+          <div className="hero-body">
+            <span class="clr-primary">CardCoach</span> is a simple and
+            user-friendly flashcard app that helps users easily create and study
+            custom flashcards on any topic.
+            <button className="btn btn-primary">
+              Let's start!{" "}
+              <FontAwesomeIcon icon={faArrowRightLong} className="btn__arrow" />
+            </button>
           </div>
 
           <div className="hero-image">

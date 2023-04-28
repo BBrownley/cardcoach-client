@@ -5,6 +5,8 @@ import "./App.css";
 import LandingPage from "./components/views/LandingPage/LandingPage";
 import Navigation from "./components/reusable/Navigation/Navigation";
 
+import NotFound from "./components/views/NotFound/NotFound";
+
 const Container = styled.div`
   a {
     color: ${props => props.theme.colors.primary};
@@ -46,6 +48,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: baseEl
+  },
+  {
+    path: "*",
+    element: <NotFound />
   }
 ]);
 

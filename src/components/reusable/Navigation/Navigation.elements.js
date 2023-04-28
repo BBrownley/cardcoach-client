@@ -30,6 +30,7 @@ export const Container = styled.div`
   .branding {
     font-weight: bold;
     font-size: 2.5rem;
+    text-decoration: none;
     > div {
       color: black;
     }

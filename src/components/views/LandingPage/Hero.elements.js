@@ -66,7 +66,7 @@ export const HeroWrapper = styled(Wrapper)`
 
   .hero-body,
   .hero-image {
-    margin-top: -25rem;
+    margin-top: -20rem;
   }
 
   .hero-body {
@@ -92,6 +92,7 @@ export const HeroWrapper = styled(Wrapper)`
 
   .hero-image {
     position: relative;
+    /* margin-top: 35vh; */
 
     /* target all 3 flashcards */
     > * {

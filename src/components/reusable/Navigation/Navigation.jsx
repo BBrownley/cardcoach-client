@@ -54,7 +54,7 @@ export default function Navigation() {
   return (
     <Wrapper>
       <Container>
-        <StyledLink className="branding">
+        <StyledLink className="branding no-line">
           <div>
             <span className="clr-primary">C</span>
             <span className="branding-blk-text">ard</span>
@@ -109,14 +109,14 @@ export default function Navigation() {
           style={{ display: hamburgerMenuOpen ? "flex" : "none" }}
         >
           <StyledLink
-            className="mobile-hamburger-menu__link"
+            className="mobile-hamburger-menu__link no-line"
             to="/login"
             key="/login"
           >
             Log in
           </StyledLink>
           <StyledLink
-            className="mobile-hamburger-menu__link"
+            className="mobile-hamburger-menu__link no-line"
             to="/register"
             key="/register"
           >
