@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import { Container } from "./Navigation.elements";
 import { Wrapper } from "../Wrapper.elements";
@@ -54,7 +55,7 @@ export default function Navigation() {
   return (
     <Wrapper>
       <Container>
-        <StyledLink className="branding no-line">
+        <StyledLink className="branding no-line" to="/">
           <div>
             <span className="clr-primary">C</span>
             <span className="branding-blk-text">ard</span>
@@ -79,7 +80,9 @@ export default function Navigation() {
         </div>
         <div className="login-register">
           <button className="btn btn-secondary">Login</button>
-          <button className="btn btn-primary">Register</button>
+          <Link to="/register" className="link-btn">
+            <button className="btn btn-primary">Register</button>
+          </Link>
         </div>
         <div className="hamburger-menu-icon" aria-label="menu">
           <div

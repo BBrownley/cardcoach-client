@@ -97,6 +97,10 @@ export const Container = styled.div`
   .login-register {
     display: flex;
     align-content: center;
+
+    button {
+      cursor: pointer;
+    }
   }
 
   .btn-secondary {

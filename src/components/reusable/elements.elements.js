@@ -6,6 +6,7 @@ const StyledLink = styled(Link)`
   text-decoration: underline;
   font-weight: bold;
   color: ${props => props.theme.colors.primary};
+  font-size: inherit;
 
   &:focus,
   &:hover,
@@ -23,7 +24,7 @@ const StyledLink = styled(Link)`
     &:link,
     &:active {
       text-decoration: none;
-    }
+    }eeee
   }
 `;
 

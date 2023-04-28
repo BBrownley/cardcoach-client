@@ -2,8 +2,11 @@ import styled, { ThemeProvider } from "styled-components";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import theme from "./theme";
 import "./App.css";
-import LandingPage from "./components/views/LandingPage/LandingPage";
+
 import Navigation from "./components/reusable/Navigation/Navigation";
+import LandingPage from "./components/views/LandingPage/LandingPage";
+
+import Register from "./components/views/Register/Register";
 
 import NotFound from "./components/views/NotFound/NotFound";
 
@@ -11,7 +14,7 @@ const Container = styled.div`
   a {
     color: ${props => props.theme.colors.primary};
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: inherit;
     &:visited {
       color: ${props => props.theme.colors.primary};
     }
@@ -37,17 +40,24 @@ const Container = styled.div`
   }
 `;
 
-const baseEl = (
-  <Container>
-    <Navigation />
-    <LandingPage />
-  </Container>
-);
-
 const router = createBrowserRouter([
   {
     path: "/",
-    element: baseEl
+    element: (
+      <Container>
+        <Navigation />
+        <LandingPage />
+      </Container>
+    )
+  },
+  {
+    path: "/register",
+    element: (
+      <Container>
+        <Navigation />
+        <Register />
+      </Container>
+    )
   },
   {
     path: "*",
