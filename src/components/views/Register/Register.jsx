@@ -20,15 +20,20 @@ export default function Register() {
     window.scrollTo(0, 0);
   });
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
     const valid = validateForm();
 
     if (valid) {
-      // TODO: submit form data to server
-      console.log("registration valid");
-      userService.register();
+      // pass user/email/pw to server
+      const newUser = { username, email, password, confirmPassword };
+
+      const res = await userService.register(newUser);
+
+      if (res?.error) {
+        setErrors(res.error);
+      }
     }
   };
 
@@ -36,8 +41,16 @@ export default function Register() {
     let errors = {};
     let isValid = true;
 
+    const alphanumeric = /^[a-z0-9]+$/i;
+
     if (!username) {
       errors.username = "Username is required";
+      isValid = false;
+    } else if (!alphanumeric.test(username)) {
+      errors.username = "Username must contain alphanumeric characters only";
+      isValid = false;
+    } else if (username.length > 20) {
+      errors.username = "Username cannot be more than 20 characters";
       isValid = false;
     }
 
