@@ -5,6 +5,7 @@ import "./App.css";
 
 import Navigation from "./components/reusable/Navigation/Navigation";
 import LandingPage from "./components/views/LandingPage/LandingPage";
+import Dashboard from "./components/views/Dashboard/Dashboard";
 
 import Register from "./components/views/Register/Register";
 
@@ -56,6 +57,15 @@ const router = createBrowserRouter([
       <Container>
         <Navigation />
         <Register />
+      </Container>
+    )
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <Container>
+        <Navigation />
+        <Dashboard />
       </Container>
     )
   },

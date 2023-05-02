@@ -9,12 +9,16 @@ import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 import userService from "../../../services/users";
 
+import { useNavigate } from "react-router-dom";
+
 export default function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -33,6 +37,9 @@ export default function Register() {
 
       if (res?.error) {
         setErrors(res.error);
+      } else {
+        // registration successful; re-direct to dashboard
+        navigate("/dashboard");
       }
     }
   };
