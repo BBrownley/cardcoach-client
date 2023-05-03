@@ -5,9 +5,12 @@
 
 import React from "react";
 
-import { Container } from "./CreateSet.elements";
+import { Container, ImportTermsButton } from "./CreateSet.elements";
 import { Sidebar } from "../../reusable/Sidebar.elements";
 import { Wrapper } from "../../reusable/Wrapper.elements";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function CreateSet() {
   return (
@@ -35,6 +38,10 @@ export default function CreateSet() {
               </div>
             </div>
             <div className="inputs-right">
+              <ImportTermsButton>
+                <FontAwesomeIcon icon={faPlusCircle} className="button-icon" />
+                <span className="button-label">Import terms</span>
+              </ImportTermsButton>
               <div className="field">
                 <label htmlFor="set-import">Import</label>
                 <textarea type="text" id="set-import" />

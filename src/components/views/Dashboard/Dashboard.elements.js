@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { Wrapper as W } from "../../reusable/Wrapper.elements";
+import { ITButton } from "../../reusable/IconTextButton.elements";
 
 export const Container = styled.div`
   margin-bottom: 10rem;
@@ -35,5 +36,15 @@ export const Wrapper = styled(W)`
 
   h4 {
     margin: 4rem 0;
+  }
+`;
+
+export const CreateSetButton = styled(ITButton)`
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+
+  h4 {
+    margin: 0;
   }
 `;

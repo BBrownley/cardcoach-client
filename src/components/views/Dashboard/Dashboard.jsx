@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Container, Wrapper } from "./Dashboard.elements";
+import { Container, Wrapper, CreateSetButton } from "./Dashboard.elements";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
-import ProgressBar from "@ramonak/react-progress-bar";
+import { ITButton } from "../../reusable/IconTextButton.elements";
 
 import { useNavigate } from "react-router-dom";
 
@@ -135,10 +135,11 @@ export default function Dashboard() {
           <Set set={sets[1]} />
         </div>
 
-        <div className="create-set-button" onClick={goToCreateSetView}>
-          <FontAwesomeIcon icon={faPlusCircle} className="plus-circle" />
-          <h4>Create new set</h4>
-        </div>
+        <CreateSetButton onClick={goToCreateSetView}>
+          <FontAwesomeIcon icon={faPlusCircle} className="button-icon" />
+          <span className="button-label">Create new set</span>
+        </CreateSetButton>
+
       </Wrapper>
     </Container>
   );

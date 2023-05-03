@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { ITButton } from "../../reusable/IconTextButton.elements";
+
 export const Container = styled.div`
   position: relative;
   .sidebar {
@@ -38,6 +40,7 @@ export const Container = styled.div`
 
       .inputs-right {
         padding-left: 2rem;
+        position: relative;
         textarea {
           height: 26.8125rem;
         }
@@ -65,5 +68,20 @@ export const Container = styled.div`
         }
       }
     }
+  }
+`;
+
+export const ImportTermsButton = styled(ITButton)`
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  padding: 0 0.5rem 0 0.25rem;
+
+  .button-icon {
+    font-size: 1.25rem;
+  }
+
+  .button-label {
+    font-size: 1.25rem;
   }
 `;
