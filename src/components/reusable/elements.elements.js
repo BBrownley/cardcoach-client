@@ -24,7 +24,7 @@ const StyledLink = styled(Link)`
     &:link,
     &:active {
       text-decoration: none;
-    }eeee
+    }
   }
 `;
 

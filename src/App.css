@@ -54,7 +54,8 @@ button {
   color: white;
 }
 
-input {
+input,
+textarea {
   width: 30rem;
   height: 2.5rem;
   border-radius: 3rem;
@@ -92,4 +93,11 @@ h6 {
 
 p {
   font-size: 1.5rem;
+}
+
+textarea {
+  border-radius: 1rem;
+  padding-top: 0.5rem;
+  height: 5rem;
+  resize: none;
 }

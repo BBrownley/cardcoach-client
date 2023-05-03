@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  border: 3px solid ${props => props.theme.colors.purple};
+  border: 3px solid ${props => props.theme.colors.primarydarkened};
   border-radius: 1rem;
   padding: 0.625rem;
   position: relative;

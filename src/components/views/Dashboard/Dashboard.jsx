@@ -7,6 +7,8 @@ import { faStar, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 import ProgressBar from "@ramonak/react-progress-bar";
 
+import { useNavigate } from "react-router-dom";
+
 import Set from "../Set/Set";
 
 const sets = [
@@ -118,6 +120,12 @@ const sets = [
 ];
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+
+  const goToCreateSetView = () => {
+    navigate("/create");
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -127,7 +135,7 @@ export default function Dashboard() {
           <Set set={sets[1]} />
         </div>
 
-        <div className="create-set-button">
+        <div className="create-set-button" onClick={goToCreateSetView}>
           <FontAwesomeIcon icon={faPlusCircle} className="plus-circle" />
           <h4>Create new set</h4>
         </div>
