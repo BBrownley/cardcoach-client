@@ -26,6 +26,13 @@ export const Container = styled.div`
     position: absolute;
     left: 18rem;
     right: 0;
+
+    input,
+    textarea {
+      font-size: 1.25rem;
+      width: 100%;
+    }
+
     .inputs {
       display: flex;
       margin-top: 2rem;
@@ -50,18 +57,6 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         margin-bottom: 2rem;
-
-        label {
-          font-weight: bold;
-          color: #777;
-          margin-bottom: 1rem;
-        }
-
-        input,
-        textarea {
-          width: 100%;
-          font-size: 1.25rem;
-        }
 
         textarea {
           min-height: 20rem;

@@ -101,3 +101,14 @@ textarea {
   height: 5rem;
   resize: none;
 }
+
+label {
+  font-weight: bold;
+  color: #777;
+  margin-bottom: 1rem;
+}
+
+input,
+textarea {
+  font-size: 1.25rem;
+}

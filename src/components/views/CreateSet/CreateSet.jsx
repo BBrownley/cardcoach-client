@@ -14,17 +14,14 @@ import { faStar, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 import ImportTermsTextArea from "./ImportTermsTextArea/ImportTermsTextArea";
 
+import SetCards from "./SetCards/SetCards";
+
 export default function CreateSet() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const [termsToImport, setTermsToImport] = useState([]); // Array of term objects to be imported from ImportTermsTextArea component
-
-  useEffect(() => {
-    console.log(termsToImport);
-    console.log(title);
-    console.log(description);
-  }, [termsToImport, title, description]);
+  // Array of term objects to be imported from ImportTermsTextArea component
+  const [termsToImport, setTermsToImport] = useState([]);
 
   return (
     <Container>
@@ -73,6 +70,7 @@ export default function CreateSet() {
               </div>
             </div>
           </div>
+          <SetCards />
         </Wrapper>
       </div>
     </Container>
