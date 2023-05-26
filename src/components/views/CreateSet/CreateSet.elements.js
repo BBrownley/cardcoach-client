@@ -75,7 +75,7 @@ export const ImportTermsButton = styled(ITButton)`
   position: absolute;
   top: 0rem;
   right: 0rem;
-  padding: 0 0.5rem 0 0.25rem;
+  padding: 0.125rem 0.5rem 0.25rem 0.5rem;
 
   .button-icon {
     font-size: 1.25rem;
