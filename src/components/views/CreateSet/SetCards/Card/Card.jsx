@@ -6,7 +6,15 @@ import { faTrash, faStar } from "@fortawesome/free-solid-svg-icons";
 import { Container } from "./Card.elements";
 
 export default function Card(props) {
-  const { id, term, definition, updateTermInSet, updateDefInSet } = props;
+  const {
+    id,
+    order,
+    term,
+    definition,
+    updateTermInSet,
+    updateDefInSet,
+    deleteCard
+  } = props;
 
   const [cardTerm, setCardTerm] = useState(term);
   const [cardDefinition, setCardDefinition] = useState(definition);
@@ -34,13 +42,17 @@ export default function Card(props) {
   return (
     <Container id={id}>
       <div className="card-top">
-        <div className="card-top__order">{id}</div>
+        <div className="card-top__order">{order}</div>
         <div className="card-top__right">
           <div className="mastery-level">
             2/10 <FontAwesomeIcon icon={faStar} className="star-icon" />
           </div>
           <div className="delete">
-            <FontAwesomeIcon icon={faTrash} className="delete-icon" />
+            <FontAwesomeIcon
+              icon={faTrash}
+              className="delete-icon"
+              onClick={() => deleteCard(id)}
+            />
           </div>
         </div>
       </div>

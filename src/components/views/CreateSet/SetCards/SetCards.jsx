@@ -9,6 +9,8 @@ export default function SetCards() {
     { id: 3, term: "termC", definition: "defC" }
   ]);
 
+  const [currentID, setCurrentID] = useState(4);
+
   /**
    * Updates the state of the cards in the set. Uses the ID passed in as a param
    * to determine which card needs to be updated
@@ -29,6 +31,23 @@ export default function SetCards() {
     );
   };
 
+  /**
+   * Adds a new, blank card to the set
+   */
+  const addNewCard = () => {
+    setCards([...cards, { id: currentID, term: "", definition: "" }]);
+    setCurrentID(currentID + 1);
+  };
+
+  /**
+   * Deletes a card from the set
+   */
+  const deleteCard = deletionID => {
+    console.log(deletionID);
+    console.log(cards.filter(card => card.id !== deletionID));
+    setCards(cards.filter(card => card.id !== deletionID));
+  };
+
   const printSet = () => {
     console.log(cards);
   };
@@ -38,9 +57,12 @@ export default function SetCards() {
       {cards.map((card, index) => {
         return (
           <Card
-            id={index + 1}
+            key={card.id}
+            id={card.id}
+            order={index + 1}
             updateTermInSet={handleSetUpdate}
             updateDefInSet={handleDefinitionUpdate}
+            deleteCard={deleteCard}
             term={card.term}
             definition={card.definition}
           />
@@ -48,6 +70,7 @@ export default function SetCards() {
       })}
 
       <div onClick={printSet}>print set</div>
+      <div onClick={addNewCard}>add new card</div>
     </div>
   );
 }
