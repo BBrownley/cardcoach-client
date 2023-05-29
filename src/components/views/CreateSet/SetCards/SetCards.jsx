@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Container } from "./SetCards.elements";
 
 import Card from "./Card/Card";
 
@@ -37,6 +38,16 @@ export default function SetCards() {
   const addNewCard = () => {
     setCards([...cards, { id: currentID, term: "", definition: "" }]);
     setCurrentID(currentID + 1);
+
+    // scroll to bottom after a short delay
+
+    setTimeout(function() {
+      window.scrollTo({
+        left: 0,
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+      });
+    }, 200);
   };
 
   /**
@@ -53,7 +64,7 @@ export default function SetCards() {
   };
 
   return (
-    <div>
+    <Container>
       {cards.map((card, index) => {
         return (
           <Card
@@ -69,8 +80,10 @@ export default function SetCards() {
         );
       })}
 
+      <button className="btn btn-primary add-card-btn" onClick={addNewCard}>
+        + Add new card
+      </button>
       <div onClick={printSet}>print set</div>
-      <div onClick={addNewCard}>add new card</div>
-    </div>
+    </Container>
   );
 }

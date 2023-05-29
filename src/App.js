@@ -35,6 +35,11 @@ const Container = styled.div`
       background-color: "#F0E9E9";
       color: black;
     }
+    &:hover {
+      opacity: 0.8;
+      transition: 0.5s;
+      cursor: pointer;
+    }
   }
 
   .clr-primary {
