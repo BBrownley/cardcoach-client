@@ -17,11 +17,67 @@ import ImportTermsTextArea from "./ImportTermsTextArea/ImportTermsTextArea";
 import SetCards from "./SetCards/SetCards";
 
 export default function CreateSet() {
+  // Card set title and desc
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  // Proposed set of cards to be created
+  const [cards, setCards] = useState([
+    { id: 1, term: "termA", definition: "defA" },
+    { id: 2, term: "termB", definition: "defB" },
+    { id: 3, term: "termC", definition: "defC" }
+  ]);
+
   // Array of term objects to be imported from ImportTermsTextArea component
   const [termsToImport, setTermsToImport] = useState([]);
+
+  // ID that will be assigned to the next created card
+  const [cardCreationID, setCardCreationID] = useState(4);
+
+  /**
+   * Adds a new, blank card to the set
+   */
+  const addNewCard = () => {
+    setCards([...cards, { id: cardCreationID, term: "", definition: "" }]);
+    setCardCreationID(cardCreationID + 1);
+
+    // scroll to bottom after a short delay
+
+    setTimeout(function() {
+      window.scrollTo({
+        left: 0,
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+      });
+    }, 200);
+  };
+
+  /**
+   * Updates the state of the cards in the set. Uses the ID passed in as a param
+   * to determine which card needs to be updated
+   */
+  const handleSetUpdate = (updateID, updatedTerm) => {
+    setCards(
+      cards.map(card =>
+        card.id === updateID ? { ...card, term: updatedTerm } : card
+      )
+    );
+  };
+
+  const handleDefinitionUpdate = (updateID, updatedDefinition) => {
+    setCards(
+      cards.map(card =>
+        card.id === updateID ? { ...card, definition: updatedDefinition } : card
+      )
+    );
+  };
+
+  /**
+   * Deletes a card from the set
+   */
+  const deleteCard = deletionID => {
+    setCards(cards.filter(card => card.id !== deletionID));
+  };
 
   return (
     <Container>
@@ -70,7 +126,13 @@ export default function CreateSet() {
               </div>
             </div>
           </div>
-          <SetCards />
+          <SetCards
+            cards={cards}
+            addNewCard={addNewCard}
+            handleSetUpdate={handleSetUpdate}
+            deleteCard={deleteCard}
+            handleDefinitionUpdate={handleDefinitionUpdate}
+          />
         </Wrapper>
       </div>
     </Container>
