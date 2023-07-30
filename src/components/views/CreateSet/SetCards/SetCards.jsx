@@ -33,7 +33,11 @@ export default function SetCards(props) {
         );
       })}
 
-      <button className="btn btn-primary add-card-btn" onClick={addNewCard}>
+      <button
+        className="btn btn-primary add-card-btn"
+        onClick={addNewCard}
+        data-testid="add-card-button"
+      >
         + Add new card
       </button>
       <div onClick={printSet}>print set</div>

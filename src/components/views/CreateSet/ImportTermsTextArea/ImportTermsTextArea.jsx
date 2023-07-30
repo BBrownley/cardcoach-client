@@ -25,9 +25,10 @@ export default function ImportTermsTextArea(props) {
   };
 
   return (
-    <div>
+    <div data-testid="import-terms">
       <textarea
         id="set-import"
+        data-testid="set-import-textarea"
         value={termsInput}
         onChange={handleSetTerms}
         placeholder="Separate terms and definitions using parenthesis and square brackets&#013;&#013;Example:&#013;&#013;(termA)  [definitionA]&#013;(termB)  [definitionB]"

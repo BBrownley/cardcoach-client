@@ -22,11 +22,7 @@ export default function CreateSet() {
   const [description, setDescription] = useState("");
 
   // Proposed set of cards to be created
-  const [cards, setCards] = useState([
-    { id: 1, term: "termA", definition: "defA" },
-    { id: 2, term: "termB", definition: "defB" },
-    { id: 3, term: "termC", definition: "defC" }
-  ]);
+  const [cards, setCards] = useState([{ term: "", definition: "" }]);
 
   // Array of term objects to be imported from ImportTermsTextArea component
   const [termsToImport, setTermsToImport] = useState([]);
@@ -99,6 +95,7 @@ export default function CreateSet() {
                 <input
                   type="text"
                   id="set-title"
+                  data-testid="set-title"
                   value={title}
                   onChange={e => setTitle(e.target.value)}
                 />
@@ -108,6 +105,7 @@ export default function CreateSet() {
                 <textarea
                   type="text"
                   id="set-description"
+                  data-testid="set-description"
                   value={description}
                   onChange={e => setDescription(e.target.value)}
                 />
@@ -119,7 +117,7 @@ export default function CreateSet() {
                 <span className="button-label">Import terms</span>
               </ImportTermsButton>
               <div className="field">
-                <label htmlFor="set-import">
+                <label htmlFor="set-import" data-testid="detected-terms-label">
                   Import ({termsToImport.length} terms found)
                 </label>
                 <ImportTermsTextArea setTermsToImport={setTermsToImport} />

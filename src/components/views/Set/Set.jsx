@@ -1,5 +1,5 @@
 /* 
-  The Set component represents an element in the user's dashboard. More specifically, it represents a flashcard Set. Users will be able to 
+  The Set component represents a user's flashcard Set in the Dashboard view. Users will be able to 
   display information about each Set, including its title, # of terms,
   and overall mastery progress
 */

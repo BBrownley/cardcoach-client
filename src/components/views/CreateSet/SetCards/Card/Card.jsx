@@ -40,7 +40,7 @@ export default function Card(props) {
   };
 
   return (
-    <Container id={id}>
+    <Container id={id} data-testid="card">
       <div className="card-top">
         <div className="card-top__order">{order}</div>
         <div className="card-top__right">
@@ -52,6 +52,7 @@ export default function Card(props) {
               icon={faTrash}
               className="delete-icon"
               onClick={() => deleteCard(id)}
+              data-testid="delete-card"
             />
           </div>
         </div>
@@ -64,6 +65,7 @@ export default function Card(props) {
             id={`term${id}`}
             value={cardTerm}
             onChange={e => handleTermChange(e.target.value)}
+            data-testid="card-term"
           />
         </div>
 
@@ -77,6 +79,7 @@ export default function Card(props) {
             rows="10"
             value={cardDefinition}
             onChange={e => handleDefinitionChange(e.target.value)}
+            data-testid="card-definition"
           ></textarea>
         </div>
       </div>
