@@ -17,11 +17,11 @@ export default function ImportTermsTextArea(props) {
 
     const terms = matches.map(match => ({
       term: match[1],
-      def: match[2]
+      definition: match[2]
     })); // create an array of objects with term and def properties from the matches
 
     props.setTermsToImport(terms); // proposed term objects to be imported
-    setTermsInput(value); // update state to match textarea
+    props.setTermsInput(value); // update state to match textarea
   };
 
   return (
@@ -29,7 +29,7 @@ export default function ImportTermsTextArea(props) {
       <textarea
         id="set-import"
         data-testid="set-import-textarea"
-        value={termsInput}
+        value={props.termsInput}
         onChange={handleSetTerms}
         placeholder="Separate terms and definitions using parenthesis and square brackets&#013;&#013;Example:&#013;&#013;(termA)  [definitionA]&#013;(termB)  [definitionB]"
       />

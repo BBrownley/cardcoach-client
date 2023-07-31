@@ -21,14 +21,17 @@ export default function CreateSet() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  // ID that will be assigned to the next created card
+  const [cardCreationID, setCardCreationID] = useState(2);
+
   // Proposed set of cards to be created
-  const [cards, setCards] = useState([{ term: "", definition: "" }]);
+  const [cards, setCards] = useState([{ id: 1, term: "", definition: "" }]);
+
+  // textarea input for ImportTermsTextArea component
+  const [termsInput, setTermsInput] = useState("");
 
   // Array of term objects to be imported from ImportTermsTextArea component
   const [termsToImport, setTermsToImport] = useState([]);
-
-  // ID that will be assigned to the next created card
-  const [cardCreationID, setCardCreationID] = useState(4);
 
   /**
    * Adds a new, blank card to the set
@@ -75,6 +78,44 @@ export default function CreateSet() {
     setCards(cards.filter(card => card.id !== deletionID));
   };
 
+  /**
+   * Imports terms from the ImportTermsTextArea into the set creation
+   */
+  const importTerms = async () => {
+    const termsIDMapped = termsToImport.map((term, index) => {
+      return { ...term, id: cardCreationID + index };
+    });
+
+    setTermsToImport(termsIDMapped);
+    setCardCreationID(termsIDMapped.length + cardCreationID);
+
+    // if only one card is in the set and blank, remove it
+    // (we're assuming the user is importing all their terms from the textarea and not using the
+    // provided initial, blank card)
+
+    if (
+      cards.length === 1 &&
+      cards[0].term.trim() === "" &&
+      cards[0].definition.trim() === ""
+    ) {
+      setCards([...termsIDMapped]);
+    } else {
+      setCards([...cards, ...termsIDMapped]);
+    }
+
+    // clear import state
+    setTermsToImport([]);
+    setTermsInput("");
+
+    setTimeout(function() {
+      window.scrollTo({
+        left: 0,
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+      });
+    }, 200);
+  };
+
   return (
     <Container>
       <Sidebar>
@@ -112,7 +153,7 @@ export default function CreateSet() {
               </div>
             </div>
             <div className="inputs-right">
-              <ImportTermsButton>
+              <ImportTermsButton onClick={importTerms}>
                 <FontAwesomeIcon icon={faPlusCircle} className="button-icon" />
                 <span className="button-label">Import terms</span>
               </ImportTermsButton>
@@ -120,7 +161,11 @@ export default function CreateSet() {
                 <label htmlFor="set-import" data-testid="detected-terms-label">
                   Import ({termsToImport.length} terms found)
                 </label>
-                <ImportTermsTextArea setTermsToImport={setTermsToImport} />
+                <ImportTermsTextArea
+                  setTermsToImport={setTermsToImport}
+                  termsInput={termsInput}
+                  setTermsInput={setTermsInput}
+                />
               </div>
             </div>
           </div>
