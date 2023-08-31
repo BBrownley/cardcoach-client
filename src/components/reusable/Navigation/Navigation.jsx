@@ -79,7 +79,9 @@ export default function Navigation() {
           </div>
         </div>
         <div className="login-register">
-          <button className="btn btn-secondary">Login</button>
+          <Link to="/login" className="link-btn">
+            <button className="btn btn-secondary">Login</button>
+          </Link>
           <Link to="/register" className="link-btn">
             <button className="btn btn-primary">Register</button>
           </Link>

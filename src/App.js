@@ -9,6 +9,7 @@ import Dashboard from "./components/views/Dashboard/Dashboard";
 import CreateSet from "./components/views/CreateSet/CreateSet";
 
 import Register from "./components/views/Register/Register";
+import Login from "./components/views/Login/Login";
 
 import NotFound from "./components/views/NotFound/NotFound";
 
@@ -63,6 +64,15 @@ const router = createBrowserRouter([
       <Container>
         <Navigation />
         <Register />
+      </Container>
+    )
+  },
+  {
+    path: "/login",
+    element: (
+      <Container>
+        <Navigation />
+        <Login />
       </Container>
     )
   },
