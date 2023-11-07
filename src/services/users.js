@@ -22,8 +22,21 @@ const register = async user => {
   }
 };
 
+// Logs a user into the system
+// Returns an object containing error messages if unsuccessful
+const login = async user => {
+  try {
+    const res = await axios.post(`${baseUrl}/users/login`, user, config);
+    console.log(res);
+    // login successful
+  } catch (err) {
+    return { error: err.response.data };
+  }
+};
+
 const userService = {
-  register
+  register,
+  login
 };
 
 export default userService;

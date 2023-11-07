@@ -29,9 +29,9 @@ export default function Login() {
 
     if (valid) {
       // pass user/pw to server
-      const newUser = { username, password };
+      const user = { username, password };
 
-      const res = await userService.register(newUser);
+      const res = await userService.login(user);
 
       if (res?.error) {
         setErrors(res.error);
@@ -78,10 +78,7 @@ export default function Login() {
             {errors.username && (
               <h5 className="field-error">
                 {errors.username}{" "}
-                <FontAwesomeIcon
-                  icon={faCircleExclamation}
-                  className="warning-icon"
-                />
+                <FontAwesomeIcon icon={faCircleExclamation} className="warning-icon" />
               </h5>
             )}
           </div>
@@ -96,10 +93,7 @@ export default function Login() {
             {errors.password && (
               <h5 className="field-error">
                 {errors.password}{" "}
-                <FontAwesomeIcon
-                  icon={faCircleExclamation}
-                  className="warning-icon"
-                />
+                <FontAwesomeIcon icon={faCircleExclamation} className="warning-icon" />
               </h5>
             )}
           </div>
