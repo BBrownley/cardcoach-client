@@ -1,7 +1,10 @@
+import { useState, useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import theme from "./theme";
 import "./App.css";
+
+import userService from "./services/users";
 
 import Navigation from "./components/reusable/Navigation/Navigation";
 import LandingPage from "./components/views/LandingPage/LandingPage";
@@ -12,6 +15,8 @@ import Register from "./components/views/Register/Register";
 import Login from "./components/views/Login/Login";
 
 import NotFound from "./components/views/NotFound/NotFound";
+
+import { AuthContext } from "./context.js";
 
 const Container = styled.div`
   a {
@@ -101,11 +106,28 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      const session = await userService.getUserSession();
+
+      if (session.loggedIn) {
+        const { id, username } = session;
+        setUser({ id, username });
+      }
+    };
+
+    checkLogin(); // send GET request to /users/login
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <RouterProvider router={router} />
-      </div>
+      <AuthContext.Provider value={user}>
+        <div className="App">
+          <RouterProvider router={router} />
+        </div>
+      </AuthContext.Provider>
     </ThemeProvider>
   );
 }

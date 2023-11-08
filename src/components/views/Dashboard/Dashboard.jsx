@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
 import { Container, Wrapper, CreateSetButton } from "./Dashboard.elements";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
-import { ITButton } from "../../reusable/IconTextButton.elements";
+import { AuthContext } from "../../../context";
 
 import { useNavigate } from "react-router-dom";
 
@@ -56,8 +56,7 @@ const sets = [
   },
   {
     title: "React",
-    description:
-      "This class covers the basics of React, including components, props, and state.",
+    description: "This class covers the basics of React, including components, props, and state.",
     totalTerms: 100,
     mastered: 40
   },
@@ -120,11 +119,16 @@ const sets = [
 ];
 
 export default function Dashboard() {
+  const currentUser = useContext(AuthContext);
   const navigate = useNavigate();
 
   const goToCreateSetView = () => {
     navigate("/create");
   };
+
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
 
   return (
     <Container>
@@ -139,7 +143,6 @@ export default function Dashboard() {
           <FontAwesomeIcon icon={faPlusCircle} className="button-icon" />
           <span className="button-label">Create new set</span>
         </CreateSetButton>
-
       </Wrapper>
     </Container>
   );

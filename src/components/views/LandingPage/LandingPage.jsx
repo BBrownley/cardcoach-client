@@ -35,8 +35,6 @@ export default function LandingPage() {
         if (entry.isIntersecting) {
           setFeaturesVisible(true);
         }
-
-        console.table(featuresVisible, entry.isIntersecting);
       },
       {
         root: null, // element used to check for visibility. null -> default to viewport
@@ -67,21 +65,16 @@ export default function LandingPage() {
           </svg>
 
           <div className="hero-body">
-            <span class="clr-primary">CardCoach</span> is a simple and
-            user-friendly flashcard app that helps users easily create and study
-            custom flashcards on any topic.
+            <span class="clr-primary">CardCoach</span> is a simple and user-friendly flashcard app
+            that helps users easily create and study custom flashcards on any topic.
             <button className="btn btn-primary">
-              Let's start!{" "}
-              <FontAwesomeIcon icon={faArrowRightLong} className="btn__arrow" />
+              Let's start! <FontAwesomeIcon icon={faArrowRightLong} className="btn__arrow" />
             </button>
           </div>
 
           <div className="hero-image">
             <div className="card-1 animate">
-              <FontAwesomeIcon
-                icon={faSquareRootVariable}
-                className="card-icon"
-              />
+              <FontAwesomeIcon icon={faSquareRootVariable} className="card-icon" />
             </div>
             <div className="card-2 animate">
               <FontAwesomeIcon icon={faFlaskVial} className="card-icon" />
@@ -94,10 +87,7 @@ export default function LandingPage() {
       </Hero>
 
       <Features>
-        <FeaturesWrapper
-          ref={featuresRef}
-          className={`${featuresVisible ? "animate" : "hidden"}`}
-        >
+        <FeaturesWrapper ref={featuresRef} className={`${featuresVisible ? "animate" : "hidden"}`}>
           <h2>Features</h2>
           <div className="features-container">
             <div className="feature">
@@ -106,10 +96,9 @@ export default function LandingPage() {
                 <span>Create custom flashcards</span>
               </h3>
               <p className="feature-description">
-                With CardCoach, users can easily create custom flashcards on any
-                topic. They can add text, images, and audio to their cards to
-                create rich, engaging study materials that are tailored to their
-                specific learning needs.
+                With CardCoach, users can easily create custom flashcards on any topic. They can add
+                text, images, and audio to their cards to create rich, engaging study materials that
+                are tailored to their specific learning needs.
               </p>
             </div>
 
@@ -119,26 +108,21 @@ export default function LandingPage() {
                 <span>Review with multiple modes</span>
               </h3>
               <p className="feature-description">
-                CardCoach offers multiple review modes to suit different
-                learning styles. Users can choose from quiz mode, flip mode, and
-                matching mode to study their flashcards in a way that works best
-                for them.
+                CardCoach offers multiple review modes to suit different learning styles. Users can
+                choose from quiz mode, flip mode, and matching mode to study their flashcards in a
+                way that works best for them.
               </p>
             </div>
 
             <div className="feature">
               <h3>
-                <FontAwesomeIcon
-                  icon={faPeopleGroup}
-                  className="feature-icon"
-                />
+                <FontAwesomeIcon icon={faPeopleGroup} className="feature-icon" />
                 <span>Share and collaborate with others</span>
               </h3>
               <p className="feature-description">
-                CardCoach makes it easy for users to share their flashcard decks
-                with friends, classmates, or study groups. With the app's
-                sharing feature, users can collaborate on decks, track progress,
-                and support each other in their learning journeys.
+                CardCoach makes it easy for users to share their flashcard decks with friends,
+                classmates, or study groups. With the app's sharing feature, users can collaborate
+                on decks, track progress, and support each other in their learning journeys.
               </p>
             </div>
 
@@ -148,9 +132,9 @@ export default function LandingPage() {
                 <span>Spaced Repetition</span>
               </h3>
               <p className="feature-description">
-                CardCoach uses a spaced repetition algorithm to help users learn
-                and retain information more efficiently by presenting flashcards
-                at increasing intervals based on the user's performance.
+                CardCoach uses a spaced repetition algorithm to help users learn and retain
+                information more efficiently by presenting flashcards at increasing intervals based
+                on the user's performance.
               </p>
             </div>
           </div>
@@ -163,28 +147,21 @@ export default function LandingPage() {
           <div className="main-content">
             <div className="description">
               <span className="clr-primary"></span>
-              CardCoach is a unique study tool that offers several advantages
-              over traditional note-taking methods. Unlike notes, CardCoach
-              helps users retain information more effectively by using a{" "}
+              CardCoach is a unique study tool that offers several advantages over traditional
+              note-taking methods. Unlike notes, CardCoach helps users retain information more
+              effectively by using a{" "}
               <span className="clr-primary">
                 spaced repetition algorithm that optimizes learning
               </span>
               . The platform also offers interactive features such as{" "}
-              <span className="clr-primary">
-                flashcards, quizzes, and progress tracking
-              </span>{" "}
-              to keep users engaged and motivated. Additionally, CardCoach
-              allows users to easily share their decks with friends or
-              classmates, making it an ideal tool for{" "}
-              <span className="clr-primary">collaborative studying</span>. With
-              its intuitive interface and customizable settings, CardCoach is an
-              efficient and effective way to study and learn. Whether you're
-              preparing for an exam or simply seeking to deepen your knowledge
-              on a subject, CardCoach can help you{" "}
-              <span className="clr-primary">
-                achieve your learning goals with ease
-              </span>
-              .
+              <span className="clr-primary">flashcards, quizzes, and progress tracking</span> to
+              keep users engaged and motivated. Additionally, CardCoach allows users to easily share
+              their decks with friends or classmates, making it an ideal tool for{" "}
+              <span className="clr-primary">collaborative studying</span>. With its intuitive
+              interface and customizable settings, CardCoach is an efficient and effective way to
+              study and learn. Whether you're preparing for an exam or simply seeking to deepen your
+              knowledge on a subject, CardCoach can help you{" "}
+              <span className="clr-primary">achieve your learning goals with ease</span>.
             </div>
             <div className="studying-image"></div>
           </div>

@@ -34,9 +34,22 @@ const login = async user => {
   }
 };
 
+// Sends GET request to server to check if there is an httpOnly cookie jwt stored. If there is one,
+// verify valid jwt, if valid, then user is currently logged in
+
+const getUserSession = async () => {
+  try {
+    const res = await axios.get(`${baseUrl}/users/login`, { withCredentials: true });
+    return res.data;
+  } catch (err) {
+    return false;
+  }
+};
+
 const userService = {
   register,
-  login
+  login,
+  getUserSession
 };
 
 export default userService;
