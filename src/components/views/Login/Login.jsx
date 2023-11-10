@@ -11,12 +11,15 @@ import userService from "../../../services/users";
 
 import { useNavigate } from "react-router-dom";
 
+import { useAuthUpdate } from "../../../context";
+
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
+  const updateUserAuth = useAuthUpdate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -31,10 +34,12 @@ export default function Login() {
       // pass user/pw to server
       const user = { username, password };
 
-      const res = await userService.login(user);
+      // update user context with user ID and username info
+      const userLogin = await userService.login(user);
+      updateUserAuth(userLogin);
 
-      if (res?.error) {
-        setErrors(res.error);
+      if (userLogin?.error) {
+        setErrors(userLogin.error);
       } else {
         // login successful; re-direct to dashboard
         navigate("/dashboard");

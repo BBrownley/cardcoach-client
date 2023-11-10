@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { Container, Wrapper, CreateSetButton } from "./Dashboard.elements";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
-import { AuthContext } from "../../../context";
+import { useAuth } from "../../../context";
 
 import { useNavigate } from "react-router-dom";
 
@@ -119,7 +119,7 @@ const sets = [
 ];
 
 export default function Dashboard() {
-  const currentUser = useContext(AuthContext);
+  const currentUser = useAuth();
   const navigate = useNavigate();
 
   const goToCreateSetView = () => {

@@ -27,7 +27,11 @@ const register = async user => {
 const login = async user => {
   try {
     const res = await axios.post(`${baseUrl}/users/login`, user, config);
-    console.log(res);
+
+    const userId = res.data.id
+    const userName = res.data.username
+    
+    return {id: userId, username: userName}
     // login successful
   } catch (err) {
     return { error: err.response.data };

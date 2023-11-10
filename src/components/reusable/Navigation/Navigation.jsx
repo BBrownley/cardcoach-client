@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../../context";
 
 import { Container } from "./Navigation.elements";
 import { Wrapper } from "../Wrapper.elements";
@@ -17,6 +18,7 @@ export default function Navigation() {
 
   // prevent hamburger menu icon from animating upon its render
   const [animateHBGMenuIcon, setAnimateHBGMenuIcon] = useState(false);
+  const user = useAuth();
 
   useEffect(() => {
     const handleResize = () => {
@@ -78,14 +80,17 @@ export default function Navigation() {
             ></input>
           </div>
         </div>
-        <div className="login-register">
-          <Link to="/login" className="link-btn">
-            <button className="btn btn-secondary">Login</button>
-          </Link>
-          <Link to="/register" className="link-btn">
-            <button className="btn btn-primary">Register</button>
-          </Link>
-        </div>
+        {!user && (
+          <div className="login-register">
+            <Link to="/login" className="link-btn">
+              <button className="btn btn-secondary">Login</button>
+            </Link>
+            <Link to="/register" className="link-btn">
+              <button className="btn btn-primary">Register</button>
+            </Link>
+          </div>
+        )}
+        {!!user && <p>You are logged in!</p>}
         <div className="hamburger-menu-icon" aria-label="menu">
           <div
             className={`
@@ -100,10 +105,7 @@ export default function Navigation() {
             <div className="bars-container__bar"></div>
           </div>
         </div>
-        <div
-          className="search-dropdown"
-          style={{ display: searchMenuOpen ? "block" : "none" }}
-        >
+        <div className="search-dropdown" style={{ display: searchMenuOpen ? "block" : "none" }}>
           <p>Search component</p>
           <p onClick={closeSearchMobile} aria-label="close search menu">
             close
@@ -113,11 +115,7 @@ export default function Navigation() {
           className="mobile-hamburger-menu"
           style={{ display: hamburgerMenuOpen ? "flex" : "none" }}
         >
-          <StyledLink
-            className="mobile-hamburger-menu__link no-line"
-            to="/login"
-            key="/login"
-          >
+          <StyledLink className="mobile-hamburger-menu__link no-line" to="/login" key="/login">
             Log in
           </StyledLink>
           <StyledLink
