@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "../../../context";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth, useAuthUpdate } from "../../../context";
+
+import userService from "../../../services/users";
 
 import { Container } from "./Navigation.elements";
 import { Wrapper } from "../Wrapper.elements";
@@ -18,7 +20,11 @@ export default function Navigation() {
 
   // prevent hamburger menu icon from animating upon its render
   const [animateHBGMenuIcon, setAnimateHBGMenuIcon] = useState(false);
+
   const user = useAuth();
+  const updateUserAuth = useAuthUpdate();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -52,6 +58,16 @@ export default function Navigation() {
 
   function closeMenuMobile() {
     setHamburgerMenuOpen(false);
+  }
+
+  async function logout() {
+    // call to server to clear cookie
+    await userService.logout();
+
+    // update app context
+    updateUserAuth(null);
+
+    navigate("/");
   }
 
   return (
@@ -90,7 +106,12 @@ export default function Navigation() {
             </Link>
           </div>
         )}
-        {!!user && <p>You are logged in!</p>}
+        {!!user && (
+          <h6>
+            Logged in as {user.username}&nbsp;&nbsp;-&nbsp;&nbsp;
+            <StyledLink onClick={logout}>Log out</StyledLink>{" "}
+          </h6>
+        )}
         <div className="hamburger-menu-icon" aria-label="menu">
           <div
             className={`

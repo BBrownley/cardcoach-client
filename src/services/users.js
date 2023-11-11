@@ -28,10 +28,10 @@ const login = async user => {
   try {
     const res = await axios.post(`${baseUrl}/users/login`, user, config);
 
-    const userId = res.data.id
-    const userName = res.data.username
-    
-    return {id: userId, username: userName}
+    const userId = res.data.id;
+    const userName = res.data.username;
+
+    return { id: userId, username: userName };
     // login successful
   } catch (err) {
     return { error: err.response.data };
@@ -50,10 +50,21 @@ const getUserSession = async () => {
   }
 };
 
+// Logs out the user by hitting the api route that will clear the httpOnly cookie storing the jwt
+const logout = async () => {
+  try {
+    await axios.delete(`${baseUrl}/users/logout`, { withCredentials: true });
+    console.log("logout");
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const userService = {
   register,
   login,
-  getUserSession
+  getUserSession,
+  logout
 };
 
 export default userService;
