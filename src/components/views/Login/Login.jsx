@@ -36,12 +36,12 @@ export default function Login() {
 
       // update user context with user ID and username info
       const userLogin = await userService.login(user);
-      updateUserAuth(userLogin);
 
       if (userLogin?.error) {
         setErrors(userLogin.error);
       } else {
-        // login successful; re-direct to dashboard
+        // login successful; update user state, re-direct to dashboard
+        updateUserAuth(userLogin);
         navigate("/dashboard");
       }
     }

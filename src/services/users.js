@@ -12,7 +12,7 @@ const register = async user => {
 
     // registration successful
 
-    return res.data; // {id: int, token: string}
+    return res.data; // {id: int, username: string}
   } catch (err) {
     /* server error during registration. usually due to SQL unique constraints 
     (username/email already taken). or the client-side checks were 

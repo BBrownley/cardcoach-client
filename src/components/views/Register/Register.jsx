@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 import userService from "../../../services/users";
+import { useAuthUpdate } from "../../../context";
 
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +20,7 @@ export default function Register() {
   const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
+  const updateUserAuth = useAuthUpdate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,7 +40,8 @@ export default function Register() {
       if (res?.error) {
         setErrors(res.error);
       } else {
-        // registration successful; re-direct to dashboard
+        // registration successful; update user, re-direct to dashboard
+        updateUserAuth(res);
         navigate("/dashboard");
       }
     }
@@ -106,10 +109,7 @@ export default function Register() {
             {errors.username && (
               <h5 className="field-error">
                 {errors.username}{" "}
-                <FontAwesomeIcon
-                  icon={faCircleExclamation}
-                  className="warning-icon"
-                />
+                <FontAwesomeIcon icon={faCircleExclamation} className="warning-icon" />
               </h5>
             )}
           </div>
@@ -124,10 +124,7 @@ export default function Register() {
             {errors.email && (
               <h5 className="field-error">
                 {errors.email}{" "}
-                <FontAwesomeIcon
-                  icon={faCircleExclamation}
-                  className="warning-icon"
-                />
+                <FontAwesomeIcon icon={faCircleExclamation} className="warning-icon" />
               </h5>
             )}
           </div>
@@ -142,10 +139,7 @@ export default function Register() {
             {errors.password && (
               <h5 className="field-error">
                 {errors.password}{" "}
-                <FontAwesomeIcon
-                  icon={faCircleExclamation}
-                  className="warning-icon"
-                />
+                <FontAwesomeIcon icon={faCircleExclamation} className="warning-icon" />
               </h5>
             )}
           </div>
@@ -160,10 +154,7 @@ export default function Register() {
             {errors.confirmPassword && (
               <h5 className="field-error">
                 {errors.confirmPassword}{" "}
-                <FontAwesomeIcon
-                  icon={faCircleExclamation}
-                  className="warning-icon"
-                />
+                <FontAwesomeIcon icon={faCircleExclamation} className="warning-icon" />
               </h5>
             )}
           </div>
@@ -173,8 +164,7 @@ export default function Register() {
         </form>
       </div>
       <h3 className="already-have-acc">
-        Already have an account? <StyledLink to="/login">Log in</StyledLink>{" "}
-        here!
+        Already have an account? <StyledLink to="/login">Log in</StyledLink> here!
       </h3>
     </Container>
   );

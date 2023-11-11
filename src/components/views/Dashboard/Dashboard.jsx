@@ -126,10 +126,6 @@ export default function Dashboard() {
     navigate("/create");
   };
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
-
   return (
     <Container>
       <Wrapper>
