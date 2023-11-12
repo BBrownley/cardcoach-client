@@ -77,11 +77,12 @@ export default function Login() {
             <input
               type="text"
               id="username"
+              data-testid="username-field"
               value={username}
               onChange={event => setUsername(event.target.value)}
             />
             {errors.username && (
-              <h5 className="field-error">
+              <h5 className="field-error" data-testid="username-field-error">
                 {errors.username}{" "}
                 <FontAwesomeIcon icon={faCircleExclamation} className="warning-icon" />
               </h5>
@@ -92,17 +93,18 @@ export default function Login() {
             <input
               type="password"
               id="password"
+              data-testid="password-field"
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
             {errors.password && (
-              <h5 className="field-error">
+              <h5 className="field-error" data-testid="password-field-error">
                 {errors.password}{" "}
                 <FontAwesomeIcon icon={faCircleExclamation} className="warning-icon" />
               </h5>
             )}
           </div>
-          <button type="submit" className="btn btn-primary create-acc">
+          <button type="submit" className="btn btn-primary create-acc" data-testid="login-btn">
             Log in
           </button>
         </form>

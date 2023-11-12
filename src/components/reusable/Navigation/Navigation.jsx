@@ -98,7 +98,7 @@ export default function Navigation() {
         </div>
         {!user && (
           <div className="login-register">
-            <Link to="/login" className="link-btn">
+            <Link to="/login" className="link-btn" data-testid="nav-login">
               <button className="btn btn-secondary">Login</button>
             </Link>
             <Link to="/register" className="link-btn">
