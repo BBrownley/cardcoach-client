@@ -17,6 +17,7 @@ export const useAuthUpdate = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -26,6 +27,8 @@ export const AuthProvider = ({ children }) => {
         const { id, username } = session;
         setUser({ id, username });
       }
+
+      setLoading(false);
     };
 
     checkLogin(); // send GET request to /users/login
@@ -36,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={user}>
+    <AuthContext.Provider value={{ user, loading }}>
       <AuthUpdateContext.Provider value={handleSetUser}>{children}</AuthUpdateContext.Provider>
     </AuthContext.Provider>
   );

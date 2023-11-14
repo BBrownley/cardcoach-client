@@ -21,7 +21,7 @@ export default function Navigation() {
   // prevent hamburger menu icon from animating upon its render
   const [animateHBGMenuIcon, setAnimateHBGMenuIcon] = useState(false);
 
-  const user = useAuth();
+  const auth = useAuth();
   const updateUserAuth = useAuthUpdate();
 
   const navigate = useNavigate();
@@ -96,7 +96,7 @@ export default function Navigation() {
             ></input>
           </div>
         </div>
-        {!user && (
+        {!auth.user && (
           <div className="login-register">
             <Link to="/login" className="link-btn" data-testid="nav-login">
               <button className="btn btn-secondary">Login</button>
@@ -106,9 +106,9 @@ export default function Navigation() {
             </Link>
           </div>
         )}
-        {!!user && (
+        {!!auth.user && (
           <h6>
-            Logged in as {user.username}&nbsp;&nbsp;-&nbsp;&nbsp;
+            Logged in as {auth.user.username}&nbsp;&nbsp;-&nbsp;&nbsp;
             <StyledLink onClick={logout}>Log out</StyledLink>{" "}
           </h6>
         )}
