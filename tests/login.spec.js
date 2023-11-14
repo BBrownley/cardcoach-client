@@ -12,7 +12,6 @@ test.beforeEach("login page navigation", async ({ browser }) => {
 });
 
 test("client performs successful login", async () => {
-  console.log(process.env.REACT_APP_TEST_USER_USERNAME);
   await page.getByTestId("username-field").type("testuser123");
   await page.getByTestId("password-field").type(process.env.TEST_USER_PASSWORD);
 

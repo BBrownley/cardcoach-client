@@ -103,11 +103,12 @@ export default function Register() {
             <input
               type="text"
               id="username"
+              data-testid="username-field"
               value={username}
               onChange={event => setUsername(event.target.value)}
             />
             {errors.username && (
-              <h5 className="field-error">
+              <h5 className="field-error" data-testid="username-field-error">
                 {errors.username}{" "}
                 <FontAwesomeIcon icon={faCircleExclamation} className="warning-icon" />
               </h5>
@@ -118,11 +119,12 @@ export default function Register() {
             <input
               type="email"
               id="email"
+              data-testid="email-field"
               value={email}
               onChange={event => setEmail(event.target.value)}
             />
             {errors.email && (
-              <h5 className="field-error">
+              <h5 className="field-error" data-testid="email-field-error">
                 {errors.email}{" "}
                 <FontAwesomeIcon icon={faCircleExclamation} className="warning-icon" />
               </h5>
@@ -133,11 +135,12 @@ export default function Register() {
             <input
               type="password"
               id="password"
+              data-testid="password-field"
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
             {errors.password && (
-              <h5 className="field-error">
+              <h5 className="field-error" data-testid="password-field-error">
                 {errors.password}{" "}
                 <FontAwesomeIcon icon={faCircleExclamation} className="warning-icon" />
               </h5>
@@ -148,17 +151,18 @@ export default function Register() {
             <input
               type="password"
               id="confirmPassword"
+              data-testid="confirm-password-field"
               value={confirmPassword}
               onChange={event => setConfirmPassword(event.target.value)}
             />
             {errors.confirmPassword && (
-              <h5 className="field-error">
+              <h5 className="field-error" data-testid="confirm-password-field-error">
                 {errors.confirmPassword}{" "}
                 <FontAwesomeIcon icon={faCircleExclamation} className="warning-icon" />
               </h5>
             )}
           </div>
-          <button type="submit" className="btn btn-primary create-acc">
+          <button type="submit" className="btn btn-primary create-acc" data-testid="register-btn">
             Create Account
           </button>
         </form>

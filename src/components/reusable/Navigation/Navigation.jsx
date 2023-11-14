@@ -101,7 +101,7 @@ export default function Navigation() {
             <Link to="/login" className="link-btn" data-testid="nav-login">
               <button className="btn btn-secondary">Login</button>
             </Link>
-            <Link to="/register" className="link-btn">
+            <Link to="/register" className="link-btn" data-testid="nav-register">
               <button className="btn btn-primary">Register</button>
             </Link>
           </div>
