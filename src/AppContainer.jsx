@@ -92,7 +92,7 @@ export default function AppContainer() {
           <Navigation />
           {auth.user !== null && <Dashboard />}
           {auth.user === null && auth.loading === false && (
-            <p className="unauthorized">
+            <p className="unauthorized" data-testid="unauthorized">
               Unauthorized access - please <Link to="/login">log in</Link>.
             </p>
           )}
@@ -106,7 +106,7 @@ export default function AppContainer() {
           <Navigation />
           {auth.user !== null && <CreateSet />}
           {auth.user === null && auth.loading === false && (
-            <p className="unauthorized">
+            <p className="unauthorized" data-testid="unauthorized">
               Unauthorized access - please <Link to="/login">log in</Link>.
             </p>
           )}

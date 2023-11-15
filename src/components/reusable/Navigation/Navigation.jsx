@@ -97,7 +97,7 @@ export default function Navigation() {
           </div>
         </div>
         {!auth.user && (
-          <div className="login-register">
+          <div className="login-register" data-testid="login-register">
             <Link to="/login" className="link-btn" data-testid="nav-login">
               <button className="btn btn-secondary">Login</button>
             </Link>
@@ -109,7 +109,7 @@ export default function Navigation() {
         {!!auth.user && (
           <h6>
             Logged in as {auth.user.username}&nbsp;&nbsp;-&nbsp;&nbsp;
-            <StyledLink onClick={logout}>Log out</StyledLink>{" "}
+            <StyledLink onClick={logout} data-testid="logout">Log out</StyledLink>{" "}
           </h6>
         )}
         <div className="hamburger-menu-icon" aria-label="menu">
