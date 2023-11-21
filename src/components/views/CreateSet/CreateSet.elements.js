@@ -4,6 +4,7 @@ import { ITButton } from "../../reusable/IconTextButton.elements";
 
 export const Container = styled.div`
   position: relative;
+  padding-top: 6.25rem;
   .sidebar {
     position: fixed;
     background-color: ${props => props.theme.colors.primary};

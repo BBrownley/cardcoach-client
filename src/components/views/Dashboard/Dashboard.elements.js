@@ -9,6 +9,7 @@ export const Container = styled.div`
 
 export const Wrapper = styled(W)`
   position: relative;
+  padding-top: 6.25rem;
 
   .create-set-button {
     position: fixed;

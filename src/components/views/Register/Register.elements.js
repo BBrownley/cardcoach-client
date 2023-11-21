@@ -5,7 +5,7 @@ import { Wrapper } from "../../reusable/Wrapper.elements";
 export const Container = styled(Wrapper)`
   font-size: 2.5rem;
   text-align: center;
-  padding-top: 7rem;
+  padding-top: 13.5rem;
 
   > * {
     margin-bottom: 7rem;

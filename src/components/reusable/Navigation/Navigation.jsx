@@ -4,7 +4,7 @@ import { useAuth, useAuthUpdate } from "../../../context";
 
 import userService from "../../../services/users";
 
-import { Container } from "./Navigation.elements";
+import { Container, NavWrapper } from "./Navigation.elements";
 import { Wrapper } from "../Wrapper.elements";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -71,7 +71,7 @@ export default function Navigation() {
   }
 
   return (
-    <Wrapper>
+    <NavWrapper>
       <Container>
         <StyledLink className="branding no-line" to="/">
           <div>
@@ -148,6 +148,6 @@ export default function Navigation() {
           </StyledLink>
         </div>
       </Container>
-    </Wrapper>
+    </NavWrapper>
   );
 }

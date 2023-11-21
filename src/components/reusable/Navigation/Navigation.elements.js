@@ -1,12 +1,25 @@
 import styled from "styled-components";
+import { Wrapper } from "../Wrapper.elements";
+
+export const NavWrapper = styled(Wrapper)`
+  max-width: none;
+  background: white;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+`;
 
 export const Container = styled.div`
-  height: 100px;
+  height: 6.25rem;
   /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25); */
   /* padding: 0.75rem; */
   display: flex;
   justify-content: space-between;
   overflow: hidden;
+
+  max-width: 1440px;
+  margin: 0 auto;
 
   /* box-shadow below nav */
   &::after {
