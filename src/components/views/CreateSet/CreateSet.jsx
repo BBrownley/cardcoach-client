@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Container, ImportTermsButton } from "./CreateSet.elements";
-import { Sidebar } from "../../reusable/Sidebar.elements";
+import { Sidebar, SidebarMobile } from "../../reusable/Sidebar.elements";
 import { Wrapper } from "../../reusable/Wrapper.elements";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -56,18 +56,12 @@ export default function CreateSet() {
    * to determine which card needs to be updated
    */
   const handleSetUpdate = (updateID, updatedTerm) => {
-    setCards(
-      cards.map(card =>
-        card.id === updateID ? { ...card, term: updatedTerm } : card
-      )
-    );
+    setCards(cards.map(card => (card.id === updateID ? { ...card, term: updatedTerm } : card)));
   };
 
   const handleDefinitionUpdate = (updateID, updatedDefinition) => {
     setCards(
-      cards.map(card =>
-        card.id === updateID ? { ...card, definition: updatedDefinition } : card
-      )
+      cards.map(card => (card.id === updateID ? { ...card, definition: updatedDefinition } : card))
     );
   };
 
@@ -93,11 +87,7 @@ export default function CreateSet() {
     // (we're assuming the user is importing all their terms from the textarea and not using the
     // provided initial, blank card)
 
-    if (
-      cards.length === 1 &&
-      cards[0].term.trim() === "" &&
-      cards[0].definition.trim() === ""
-    ) {
+    if (cards.length === 1 && cards[0].term.trim() === "" && cards[0].definition.trim() === "") {
       setCards([...termsIDMapped]);
     } else {
       setCards([...cards, ...termsIDMapped]);
@@ -127,6 +117,16 @@ export default function CreateSet() {
         <div className="sidebar__group">Skip mastered terms: On</div>
         <div className="sidebar__group">Mastery level req.: 10</div>
       </Sidebar>
+      <SidebarMobile>
+        <div className="sidebar__group sidebar__group--space-around">
+          <button className="create">Create</button>
+          <button>Cancel</button>
+        </div>
+        <div className="sidebar__group">
+          <div className="skip-mastered-terms">Skip mastered terms: On</div>
+          <div>Mastery level req.: 10</div>
+        </div>
+      </SidebarMobile>
       <div className="main">
         <Wrapper>
           <div className="inputs">

@@ -4,13 +4,7 @@ import { Container } from "./SetCards.elements";
 import Card from "./Card/Card";
 
 export default function SetCards(props) {
-  const {
-    cards,
-    addNewCard,
-    handleSetUpdate,
-    deleteCard,
-    handleDefinitionUpdate
-  } = props;
+  const { cards, addNewCard, handleSetUpdate, deleteCard, handleDefinitionUpdate } = props;
 
   const printSet = () => {
     console.log(cards);
@@ -40,7 +34,7 @@ export default function SetCards(props) {
       >
         + Add new card
       </button>
-      <div onClick={printSet}>print set</div>
+      {/* <div onClick={printSet}>print set</div> */}
     </Container>
   );
 }

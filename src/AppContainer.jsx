@@ -103,7 +103,6 @@ export default function AppContainer() {
       path: "/create",
       element: (
         <Container>
-          <Navigation />
           {auth.user !== null && <CreateSet />}
           {auth.user === null && auth.loading === false && (
             <p className="unauthorized" data-testid="unauthorized">

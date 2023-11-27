@@ -4,7 +4,7 @@ import { ITButton } from "../../reusable/IconTextButton.elements";
 
 export const Container = styled.div`
   position: relative;
-  padding-top: 6.25rem;
+  /* padding-top: 6.25rem; */
   .sidebar {
     position: fixed;
     background-color: ${props => props.theme.colors.primary};
@@ -25,7 +25,7 @@ export const Container = styled.div`
   .main {
     /* border: 1px solid black; */
     position: absolute;
-    left: 18rem;
+    left: 18rem; /* make space for sidebar */
     right: 0;
 
     input,
@@ -63,6 +63,21 @@ export const Container = styled.div`
           min-height: 20rem;
         }
       }
+
+      @media (max-width: 1280px) {
+        flex-direction: column;
+        .inputs-left {
+          padding-right: 0;
+        }
+
+        .inputs-right {
+          padding-left: 0;
+        }
+      }
+    }
+
+    @media (max-width: 800px) {
+      left: 0;
     }
   }
 `;

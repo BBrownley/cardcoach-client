@@ -23,12 +23,6 @@ export const Container = styled.div`
     &__right {
       display: flex;
 
-      .mastery-level {
-        .star-icon {
-          color: ${props => props.theme.colors.gold};
-        }
-      }
-
       .delete {
         margin-left: 1rem;
         .delete-icon {
@@ -62,6 +56,20 @@ export const Container = styled.div`
 
     &__definition {
       margin-left: 1rem;
+      textarea {
+        height: 10rem;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      flex-direction: column;
+      &__term {
+        margin-right: 0;
+      }
+      &__definition {
+        margin-left: 0;
+        margin-top: 1rem;
+      }
     }
   }
 `;

@@ -1,3 +1,7 @@
+/* 
+Sidebar component will be used for the create/edit set views
+*/
+
 import styled from "styled-components";
 
 export const Sidebar = styled.div`
@@ -13,14 +17,6 @@ export const Sidebar = styled.div`
     text-align: center;
     margin-bottom: 1rem;
 
-    /* display: flex;
-    justify-content: space-between; */
-
-    /* padding: 1rem;
-    background-color: black;
-
-    display: flex;
-    justify-content: space-between; */
     &[class*="active"] {
       background-color: #92f2ff;
       color: black;
@@ -43,5 +39,37 @@ export const Sidebar = styled.div`
       cursor: pointer;
       background-color: ${props => props.theme.colors.primarydarkened};
     }
+  }
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+`;
+
+export const SidebarMobile = styled(Sidebar)`
+  display: none;
+  right: 0;
+  height: 10rem;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1000;
+  padding: 1rem;
+
+  .sidebar__group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    .create {
+      margin-bottom: 1.625rem;
+    }
+    .skip-mastered-terms {
+      margin-bottom: 1.625rem;
+    }
+  }
+
+  @media (max-width: 800px) {
+    display: flex;
+    align-items: center;
   }
 `;
