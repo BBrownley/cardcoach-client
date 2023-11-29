@@ -4,6 +4,7 @@
 */
 
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Container, ImportTermsButton } from "./CreateSet.elements";
 import { Sidebar, SidebarMobile } from "../../reusable/Sidebar.elements";
@@ -16,7 +17,11 @@ import ImportTermsTextArea from "./ImportTermsTextArea/ImportTermsTextArea";
 
 import SetCards from "./SetCards/SetCards";
 
+import setsService from "../../../services/sets";
+
 export default function CreateSet() {
+  const navigate = useNavigate();
+
   // Card set title and desc
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -106,21 +111,34 @@ export default function CreateSet() {
     }, 200);
   };
 
+  const goToDashboard = () => {
+    navigate("/dashboard");
+  };
+
+  const createSet = async () => {
+    const res = await setsService.create(title, description, cards);
+    if (res.error) {
+      console.log(res.error); // TODO: generate error toast
+    }
+  };
+
   return (
     <Container>
       <Sidebar>
         <div className="sidebar__group active">Create flashcard set</div>
         <div className="sidebar__group sidebar__group--space-around">
-          <button>Create</button>
-          <button>Cancel</button>
+          <button onClick={createSet}>Create</button>
+          <button onClick={goToDashboard}>Cancel</button>
         </div>
         <div className="sidebar__group">Skip mastered terms: On</div>
         <div className="sidebar__group">Mastery level req.: 10</div>
       </Sidebar>
       <SidebarMobile>
         <div className="sidebar__group sidebar__group--space-around">
-          <button className="create">Create</button>
-          <button>Cancel</button>
+          <button className="create" onClick={createSet}>
+            Create
+          </button>
+          <button onClick={goToDashboard}>Cancel</button>
         </div>
         <div className="sidebar__group">
           <div className="skip-mastered-terms">Skip mastered terms: On</div>
