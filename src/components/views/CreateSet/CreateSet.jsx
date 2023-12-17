@@ -117,8 +117,10 @@ export default function CreateSet() {
 
   const createSet = async () => {
     const res = await setsService.create(title, description, cards);
-    if (res.error) {
+    if (res?.error) {
       console.log(res.error); // TODO: generate error toast
+    } else {
+      navigate("/dashboard");
     }
   };
 
