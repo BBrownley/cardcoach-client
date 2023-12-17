@@ -1,3 +1,5 @@
+// To run test files, use the command: npx playwright test
+
 require("dotenv").config({ path: "../src/.env" });
 const { test, expect } = require("@playwright/test");
 

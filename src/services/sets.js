@@ -7,13 +7,8 @@ import config from "./config";
 const create = async (title, description, cards) => {
   try {
     const payload = { title, description, cards };
-    console.log("1");
-    const res = await axios.post(`${baseUrl}/sets`, payload, config);
-    console.log("2");
-
-    console.log(res);
+    await axios.post(`${baseUrl}/sets`, payload, config);
   } catch (err) {
-    console.log(err);
     return { error: err.response.data.error };
   }
 };

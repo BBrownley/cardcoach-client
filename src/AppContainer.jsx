@@ -63,7 +63,8 @@ export default function AppContainer() {
       element: (
         <Container>
           <Navigation />
-          <LandingPage />
+          {auth.user !== null && <Dashboard />}
+          {auth.user === null && auth.loading === false && <LandingPage />}
         </Container>
       )
     },
