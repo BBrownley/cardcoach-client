@@ -13,8 +13,21 @@ const create = async (title, description, cards) => {
   }
 };
 
+// fetches all sets belonging to the current user
+const getUserSets = async () => {
+  try {
+    const res = await axios.get(`${baseUrl}/sets`, config);
+    const sets = res.data.userSets;
+    return sets;
+  } catch (err) {
+    console.error("An unexpected error has occurred");
+    return [];
+  }
+};
+
 const setsService = {
-  create
+  create,
+  getUserSets
 };
 
 export default setsService;

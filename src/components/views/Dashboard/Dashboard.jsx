@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Container, Wrapper, CreateSetButton } from "./Dashboard.elements";
 
@@ -11,6 +11,9 @@ import { useNavigate } from "react-router-dom";
 
 import Set from "../Set/Set";
 
+import setsService from "../../../services/sets";
+
+// Example set data
 const sets = [
   {
     title: "Introduction to JavaScript",
@@ -122,6 +125,17 @@ export default function Dashboard() {
   const currentUser = useAuth();
   const navigate = useNavigate();
 
+  const [userSets, setUserSets] = useState([]);
+
+  useEffect(() => {
+    async function getUserSets() {
+      const sets = await setsService.getUserSets();
+      setUserSets(sets);
+    }
+
+    getUserSets();
+  }, []);
+
   const goToCreateSetView = () => {
     navigate("/create");
   };
@@ -133,6 +147,10 @@ export default function Dashboard() {
         <div className="recent-sets set-container">
           <Set set={sets[0]} />
           <Set set={sets[1]} />
+          {console.log(userSets)}
+          {userSets.map((set, i) => (
+            <Set set={set} id={i} />
+          ))}
         </div>
 
         <CreateSetButton onClick={goToCreateSetView}>
