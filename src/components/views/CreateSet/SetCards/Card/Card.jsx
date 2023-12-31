@@ -54,7 +54,7 @@ export default function Card(props) {
             id={`term${id}`}
             value={cardTerm}
             onChange={e => handleTermChange(e.target.value)}
-            data-testid="card-term"
+            data-testid={`card-term-${id}`}
           />
         </div>
 
@@ -68,7 +68,7 @@ export default function Card(props) {
             rows="10"
             value={cardDefinition}
             onChange={e => handleDefinitionChange(e.target.value)}
-            data-testid="card-definition"
+            data-testid={`card-definition-${id}`}
           ></textarea>
         </div>
       </div>

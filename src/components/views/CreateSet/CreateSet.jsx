@@ -129,7 +129,7 @@ export default function CreateSet() {
       <Sidebar>
         <div className="sidebar__group active">Create flashcard set</div>
         <div className="sidebar__group sidebar__group--space-around">
-          <button onClick={createSet}>Create</button>
+          <button onClick={createSet} data-testid="submit-set">Create</button>
           <button onClick={goToDashboard}>Cancel</button>
         </div>
         <div className="sidebar__group">Skip mastered terms: On</div>

@@ -143,17 +143,15 @@ export default function Dashboard() {
   return (
     <Container>
       <Wrapper>
-        <h4>Recently studied</h4>
+        <h4>My sets</h4>
         <div className="recent-sets set-container">
-          <Set set={sets[0]} />
-          <Set set={sets[1]} />
-          {console.log(userSets)}
+          {userSets.length === 0 && <p data-testid="no-sets-prompt">You don't have any sets, try making your first one!</p>}
           {userSets.map((set, i) => (
             <Set set={set} id={i} />
           ))}
         </div>
 
-        <CreateSetButton onClick={goToCreateSetView}>
+        <CreateSetButton onClick={goToCreateSetView} data-testid="create-set-btn">
           <FontAwesomeIcon icon={faPlusCircle} className="button-icon" />
           <span className="button-label">Create new set</span>
         </CreateSetButton>

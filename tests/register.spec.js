@@ -1,24 +1,19 @@
 require("dotenv").config({ path: "../src/.env" });
 const { test, expect } = require("@playwright/test");
 const randomString = require("randomstring");
+const register = require("./functions/register.js");
 
 let page;
 
-test.beforeEach("register page navigation", async ({ browser }) => {
+test.beforeEach("initial page load, navigation to registration page", async ({ browser }) => {
   page = await browser.newPage();
 
-  // initialize app, go to log in page
   await page.goto("http://localhost:3000/");
   await page.getByTestId("nav-register").click();
 });
 
 test("client performs successful registration", async () => {
-  await page.getByTestId("username-field").type(`testuser${randomString.generate(12)}`);
-  await page.getByTestId("email-field").type(`testuser${randomString.generate()}@email.com`);
-  await page.getByTestId("password-field").type("12345678");
-  await page.getByTestId("confirm-password-field").type("12345678");
-
-  await page.getByTestId("register-btn").click();
+  await register(page);
 
   await expect(page).toHaveURL("http://localhost:3000/dashboard"); // confirm successful registration
 });

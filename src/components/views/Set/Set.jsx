@@ -22,7 +22,7 @@ export default function Set(props) {
   };
 
   return (
-    <Container onClick={goToSet}>
+    <Container onClick={goToSet} className="flashcard-set">
       <div className="title-desc">
         <div className="title">{title}</div>
         <div className="desc">{description}</div>
