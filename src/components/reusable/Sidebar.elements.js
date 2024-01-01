@@ -13,6 +13,12 @@ export const Sidebar = styled.div`
   height: 100vh;
   font-size: 1rem;
   .sidebar__group {
+    &--spaced {
+      display: flex;
+      flex-direction: column;
+      align-content: space-between;
+    }
+
     width: 100%;
     text-align: center;
     margin-bottom: 1rem;
@@ -25,6 +31,13 @@ export const Sidebar = styled.div`
     &--space-around {
       display: flex;
       justify-content: space-around;
+    }
+
+    &__el {
+      /* gives sidebar group elements extra spacing above and below */
+      &--m2 {
+        margin: 2rem 0;
+      }
     }
   }
   button {
@@ -44,6 +57,14 @@ export const Sidebar = styled.div`
   @media (max-width: 800px) {
     display: none;
   }
+
+  /* spreads out sidebar groups vertically */
+  &.spaced {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
 `;
 
 export const SidebarMobile = styled(Sidebar)`

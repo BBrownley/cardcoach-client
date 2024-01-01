@@ -8,6 +8,7 @@ import Navigation from "./components/reusable/Navigation/Navigation";
 import LandingPage from "./components/views/LandingPage/LandingPage";
 import Dashboard from "./components/views/Dashboard/Dashboard";
 import CreateSet from "./components/views/CreateSet/CreateSet";
+import SetView from "./components/views/SetView/SetView";
 
 import Register from "./components/views/Register/Register";
 import Login from "./components/views/Login/Login";
@@ -105,6 +106,19 @@ export default function AppContainer() {
       element: (
         <Container>
           {auth.user !== null && <CreateSet />}
+          {auth.user === null && auth.loading === false && (
+            <p className="unauthorized" data-testid="unauthorized">
+              Unauthorized access - please <Link to="/login">log in</Link>.
+            </p>
+          )}
+        </Container>
+      )
+    },
+    {
+      path: "/sets/:setid",
+      element: (
+        <Container>
+          {auth.user !== null && <SetView />}
           {auth.user === null && auth.loading === false && (
             <p className="unauthorized" data-testid="unauthorized">
               Unauthorized access - please <Link to="/login">log in</Link>.
