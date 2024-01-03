@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
     left: 0;
     bottom: 0;
     z-index: 100;
+
     svg {
       position: absolute;
       top: 50%;

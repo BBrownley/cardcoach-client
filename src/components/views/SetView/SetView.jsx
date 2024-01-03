@@ -18,11 +18,27 @@ import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 
 export default function SetView(props) {
   const [flipped, setFlipped] = useState(false); // false: term is showing, true: definition is showing
-  const [currentSet, setCurrentSet] = useState([]);
+  const [currentSet, setCurrentSet] = useState({
+    setTitle: null,
+    setDesc: null,
+    setCards: []
+  });
+  const [cardIndex, setCardIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
   const currLoc = useParams(); // {setId: int}
 
   const flipCurrentCard = () => {
     setFlipped(prevState => !prevState);
+  };
+
+  const nextCard = () => {
+    setCardIndex(prevState => (prevState + 1) % currentSet.setCards.length);
+  };
+
+  const prevCard = () => {
+    setCardIndex(
+      prevState => (prevState - 1 + currentSet.setCards.length) % currentSet.setCards.length
+    );
   };
 
   useEffect(() => {
@@ -30,15 +46,16 @@ export default function SetView(props) {
       const set = await setService.getUserSetById(currLoc.setid);
       console.log(set);
       setCurrentSet(set);
+      setLoading(false);
     };
     getUserSet();
   }, []);
 
   return (
-    <Wrapper className="loading">
-      <div className="loading-spinner-container">
+    <Wrapper className={loading ? "loading" : ""}>
+      <div className={` ${loading ? "loading-spinner-container" : ""}`}>
         <Oval
-          visible={true}
+          visible={loading}
           height="200"
           width="200"
           color="#4fa94d"
@@ -65,23 +82,25 @@ export default function SetView(props) {
 
       <div className="main">
         <div className="set-info">
-          <span>Computer Architecture and Operating Systems Management</span>
-          <span>0/38 terms mastered</span>
+          <span>{currentSet.setTitle}</span>
+          <span>0/{currentSet.setCards.length} terms mastered</span>
         </div>
         <div className={`card ${flipped ? "flipped" : ""}`} onClick={flipCurrentCard}>
           <div className="card-inner">
             <div className="card-front">
-              <span>Dynamic RAM</span>
+              <span>{!loading && currentSet.setCards[cardIndex].term}</span>
             </div>
             <div className="card-back">
-              <span>definition</span>
+              <span>{!loading && currentSet.setCards[cardIndex].definition}</span>
             </div>
           </div>
         </div>
         <div className="controls-count">
-          <FaLongArrowAltLeft className="control" />
-          <strong className="count">1/47</strong>
-          <FaLongArrowAltRight className="control" />
+          <FaLongArrowAltLeft className="control" onClick={prevCard} />
+          <strong className="count">
+            {cardIndex + 1}/{!loading && currentSet.setCards.length}
+          </strong>
+          <FaLongArrowAltRight className="control" onClick={nextCard} />
         </div>
       </div>
     </Wrapper>
