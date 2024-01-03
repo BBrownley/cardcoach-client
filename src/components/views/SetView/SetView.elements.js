@@ -1,6 +1,31 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+  position: relative;
+  height: 100vh;
+
+  /* set up styles for loading-spinner, differentiate from remaining child elements for optimistic rendering ux */
+  .loading-spinner-container {
+    border: 1px solid;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &[class*="loading"] > *:not(.loading-spinner-container) {
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
   .main {
     margin-left: 18rem;
     padding: 2rem;

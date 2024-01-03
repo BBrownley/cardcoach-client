@@ -25,9 +25,22 @@ const getUserSets = async () => {
   }
 };
 
+// fetches a single set belonging to the current user, along with its associated cards
+const getUserSetById = async setId => {
+  try {
+    const res = await axios.get(`${baseUrl}/sets/${setId}`, config);
+    const set = res.data;
+    return set;
+  } catch (err) {
+    console.error("An unexpected error has occurred");
+    return [];
+  }
+};
+
 const setsService = {
   create,
-  getUserSets
+  getUserSets,
+  getUserSetById
 };
 
 export default setsService;
