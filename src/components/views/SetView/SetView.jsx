@@ -18,6 +18,7 @@ import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 
 export default function SetView(props) {
   const [flipped, setFlipped] = useState(false); // false: term is showing, true: definition is showing
+  const [hasFlipped, setHasFlipped] = useState(false); // has the user flipped this card after navigating to it yet?
   const [currentSet, setCurrentSet] = useState({
     setTitle: null,
     setDesc: null,
@@ -29,22 +30,26 @@ export default function SetView(props) {
 
   const flipCurrentCard = () => {
     setFlipped(prevState => !prevState);
+    setHasFlipped(true);
   };
 
   const nextCard = () => {
     setCardIndex(prevState => (prevState + 1) % currentSet.setCards.length);
+    setFlipped(false);
+    setHasFlipped(false);
   };
 
   const prevCard = () => {
     setCardIndex(
       prevState => (prevState - 1 + currentSet.setCards.length) % currentSet.setCards.length
     );
+    setFlipped(false);
+    setHasFlipped(false);
   };
 
   useEffect(() => {
     const getUserSet = async () => {
       const set = await setService.getUserSetById(currLoc.setid);
-      console.log(set);
       setCurrentSet(set);
       setLoading(false);
     };
@@ -85,7 +90,15 @@ export default function SetView(props) {
           <span>{currentSet.setTitle}</span>
           <span>0/{currentSet.setCards.length} terms mastered</span>
         </div>
-        <div className={`card ${flipped ? "flipped" : ""}`} onClick={flipCurrentCard}>
+        {/* only want the flipped-reverse class applied when the user first flips over the card
+            otherwise the animation wrongly plays on card navigation
+        */}
+        <div
+          className={`card ${flipped ? "flipped" : ""} ${
+            !flipped && hasFlipped ? "flipped-reverse" : ""
+          }`}
+          onClick={flipCurrentCard}
+        >
           <div className="card-inner">
             <div className="card-front">
               <span>{!loading && currentSet.setCards[cardIndex].term}</span>

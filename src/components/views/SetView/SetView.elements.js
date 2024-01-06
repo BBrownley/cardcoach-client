@@ -63,13 +63,20 @@ export const Wrapper = styled.div`
       &.flipped > .card-inner {
         cursor: pointer;
         transform: rotateY(180deg);
+        transition: 500ms ease; /* Apply this animation only while flipping */
+      }
+
+      &.flipped-reverse > .card-inner {
+        cursor: pointer;
+        transform: rotateY(0);
+        transition: 500ms ease; /* Apply this animation only while flipping */
       }
 
       .card-inner {
+        z-index: -100;
         height: 100%;
         width: 100%;
         position: relative;
-        transition: transform 1.25s ease;
         transform-style: preserve-3d;
 
         .card-front,
@@ -117,6 +124,7 @@ export const Wrapper = styled.div`
 
       .count {
         font-size: 2rem;
+        user-select: none;
       }
 
       .control {
