@@ -55,9 +55,15 @@ export default function SetView(props) {
 
   useEffect(() => {
     const getUserSet = async () => {
-      const set = await setService.getUserSetById(currLoc.setid);
-      setCurrentSet(set);
-      setLoading(false);
+      try {
+        const set = await setService.getUserSetById(currLoc.setid);
+        setCurrentSet(set);
+        setLoading(false);
+      } catch (err) {
+        // redirect to not found page
+        navigate("/notfound")
+      }
+      
     };
     getUserSet();
   }, []);

@@ -128,6 +128,10 @@ export default function AppContainer() {
       )
     },
     {
+      path: "/notfound",
+      element: <NotFound />
+    },
+    {
       path: "*",
       element: <NotFound />
     }

@@ -9,7 +9,7 @@ export default function NotFound() {
     <Container>
       <NotFoundWrapper>
         <h2>404 - Not Found</h2>
-        <p>
+        <p data-testid="not-found">
           Oops! Looks like the flashcards you were looking for got lost in a
           pile of virtual clutter. Try searching for it again or revisit the{" "}
           <StyledLink to="/">homepage</StyledLink>

@@ -32,8 +32,12 @@ const getUserSetById = async setId => {
     const set = res.data;
     return set;
   } catch (err) {
-    console.error("An unexpected error has occurred");
-    return [];
+    if (err.response.status === 404) { // unable to find set with the passed in id from the url
+      throw new Error(err.response.data.error);
+    }
+    
+    throw new Error("An unexpected error has occurred");
+
   }
 };
 

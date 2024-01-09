@@ -175,3 +175,21 @@ test(`
   termShowing = await page.getByTestId("card-term").textContent();
   expect(termShowing).toEqual("term 1");
 });
+
+test("user enters invalid URL (non-existing set), expected redirection to not found page", async () => {
+  const user = {
+    username: process.env.TEST_USER_USERNAME,
+    password: process.env.TEST_USER_PASSWORD
+  };
+
+  await login(page, user.username, user.password);
+
+  // confirm successful login before continuing
+  await expect(page).toHaveURL("http://localhost:3000/dashboard");
+
+  await page.goto('http://localhost:3000/sets/123507213578238751234');
+
+  // redirect to not found page on server error
+  await expect(page).toHaveURL("http://localhost:3000/notfound");
+  
+});
