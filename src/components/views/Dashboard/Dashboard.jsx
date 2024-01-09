@@ -130,6 +130,7 @@ export default function Dashboard() {
   useEffect(() => {
     async function getUserSets() {
       const sets = await setsService.getUserSets();
+      console.log(sets);
       setUserSets(sets);
     }
 
@@ -140,14 +141,20 @@ export default function Dashboard() {
     navigate("/create");
   };
 
+  const goToViewSet = setId => {
+    navigate(`/sets/${setId}`);
+  };
+
   return (
     <Container>
       <Wrapper>
         <h4>My sets</h4>
         <div className="recent-sets set-container">
-          {userSets.length === 0 && <p data-testid="no-sets-prompt">You don't have any sets, try making your first one!</p>}
+          {userSets.length === 0 && (
+            <p data-testid="no-sets-prompt">You don't have any sets, try making your first one!</p>
+          )}
           {userSets.map((set, i) => (
-            <Set set={set} id={i} />
+            <Set set={set} id={i} goToViewSet={goToViewSet} />
           ))}
         </div>
 

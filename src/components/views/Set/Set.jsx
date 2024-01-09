@@ -10,19 +10,21 @@ import { faStar, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import ProgressBar from "@ramonak/react-progress-bar";
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Container } from "./Set.elements";
 
 export default function Set(props) {
-  const { title, description, totalTerms, mastered } = props.set;
+  const { title, description, totalTerms, mastered, setId } = props.set;
+  const navigate = useNavigate();
 
   // goes into the flashcard set for user to begin studying from it
   const goToSet = () => {
-    console.log("opening set");
+    navigate(`/sets/${setId}`);
   };
 
   return (
-    <Container onClick={goToSet} className="flashcard-set">
+    <Container onClick={goToSet} className="flashcard-set" data-testid={`dashboard-set-${setId}`}>
       <div className="title-desc">
         <div className="title">{title}</div>
         <div className="desc">{description}</div>

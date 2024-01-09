@@ -6,6 +6,7 @@ URL matching /baseUrl/sets/:setID:
 */
 
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { Oval } from "react-loader-spinner";
 
@@ -27,6 +28,11 @@ export default function SetView(props) {
   const [cardIndex, setCardIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const currLoc = useParams(); // {setId: int}
+  const navigate = useNavigate();
+
+  const navigateToDashboard = () => {
+    navigate("/dashboard");
+  };
 
   const flipCurrentCard = () => {
     setFlipped(prevState => !prevState);
@@ -81,6 +87,9 @@ export default function SetView(props) {
           <div className="sidebar__group__el--m2">Skip mastered terms: On</div>
         </div>
         <div className="sidebar__group">
+          <div className="sidebar__group__el--m2" onClick={navigateToDashboard}>
+            Dashboard
+          </div>
           <div className="sidebar__group__el--m2">Reset progress</div>
         </div>
       </Sidebar>
@@ -88,7 +97,9 @@ export default function SetView(props) {
       <div className="main">
         <div className="set-info">
           <span>{currentSet.setTitle}</span>
-          <span>0/{currentSet.setCards.length} terms mastered</span>
+          <span>
+            0/<span data-testid="set-card-count">{currentSet.setCards.length}</span> terms mastered
+          </span>
         </div>
         {/* only want the flipped-reverse class applied when the user first flips over the card
             otherwise the animation wrongly plays on card navigation
@@ -98,22 +109,27 @@ export default function SetView(props) {
             !flipped && hasFlipped ? "flipped-reverse" : ""
           }`}
           onClick={flipCurrentCard}
+          data-testid="card"
         >
           <div className="card-inner">
             <div className="card-front">
-              <span>{!loading && currentSet.setCards[cardIndex].term}</span>
+              <span data-testid={`card-term${flipped ? "-hidden" : ""}`}>
+                {!loading && currentSet.setCards[cardIndex].term}
+              </span>
             </div>
             <div className="card-back">
-              <span>{!loading && currentSet.setCards[cardIndex].definition}</span>
+              <span data-testid={`card-definition${flipped ? "" : "-hidden"}`}>
+                {!loading && currentSet.setCards[cardIndex].definition}
+              </span>
             </div>
           </div>
         </div>
         <div className="controls-count">
-          <FaLongArrowAltLeft className="control" onClick={prevCard} />
+          <FaLongArrowAltLeft className="control" onClick={prevCard} data-testid="navigate-prev" />
           <strong className="count">
             {cardIndex + 1}/{!loading && currentSet.setCards.length}
           </strong>
-          <FaLongArrowAltRight className="control" onClick={nextCard} />
+          <FaLongArrowAltRight className="control" onClick={nextCard} data-testid="navigate-next" />
         </div>
       </div>
     </Wrapper>
