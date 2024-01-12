@@ -31,14 +31,11 @@ const getUserSetById = async setId => {
     const res = await axios.get(`${baseUrl}/sets/${setId}`, config);
     const set = res.data;
     return set;
-  } catch (err) {
-    if (err.response.status === 404) { // unable to find set with the passed in id from the url
-      throw new Error(err.response.data.error);
-    }
-    
-    throw new Error("An unexpected error has occurred");
-
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
+ 
 };
 
 const setsService = {

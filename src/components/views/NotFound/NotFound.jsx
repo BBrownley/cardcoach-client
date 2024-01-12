@@ -1,10 +1,14 @@
 import React from "react";
+import {useError} from "../../../context"
 
 import { NotFound as Container, NotFoundWrapper } from "./NotFound.elements";
 
 import StyledLink from "../../reusable/elements.elements";
 
 export default function NotFound() {
+
+  const errMsg = useError();
+
   return (
     <Container>
       <NotFoundWrapper>

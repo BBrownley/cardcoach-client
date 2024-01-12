@@ -176,7 +176,7 @@ test(`
   expect(termShowing).toEqual("term 1");
 });
 
-test("user enters invalid URL (non-existing set), expected redirection to not found page", async () => {
+test("user enters invalid URL (non-existing set), expect error modal with go back functionality", async () => {
   const user = {
     username: process.env.TEST_USER_USERNAME,
     password: process.env.TEST_USER_PASSWORD
@@ -189,7 +189,17 @@ test("user enters invalid URL (non-existing set), expected redirection to not fo
 
   await page.goto('http://localhost:3000/sets/123507213578238751234');
 
-  // redirect to not found page on server error
-  await expect(page).toHaveURL("http://localhost:3000/notfound");
+  // expect error modal with appropriate error message
+  const errorStatus = await page.getByTestId("error-status").textContent();
+  const errorMsg = await page.getByTestId("error-msg").textContent();
+
+  expect(errorStatus).toEqual("404 - Not found")
+  expect(errorMsg).toEqual("The flash card set you requested does not exist - please go back and try looking for it again")
   
+  // go back functionality
+  const goBack = await page.getByTestId("go-back");
+  await goBack.click();
+
+  await expect(page).toHaveURL("http://localhost:3000/dashboard");
+
 });

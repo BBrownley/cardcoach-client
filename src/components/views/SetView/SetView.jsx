@@ -17,6 +17,10 @@ import { Wrapper } from "./SetView.elements.js";
 
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 
+import {useError, useErrorUpdate} from "../../../context.js"
+
+import ErrorModal from "../ErrorPage/ErrorModal.jsx";
+
 export default function SetView(props) {
   const [flipped, setFlipped] = useState(false); // false: term is showing, true: definition is showing
   const [hasFlipped, setHasFlipped] = useState(false); // has the user flipped this card after navigating to it yet?
@@ -27,8 +31,12 @@ export default function SetView(props) {
   });
   const [cardIndex, setCardIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false)
   const currLoc = useParams(); // {setId: int}
   const navigate = useNavigate();
+
+  const errObj = useError();
+  const errObjUpdate = useErrorUpdate();
 
   const navigateToDashboard = () => {
     navigate("/dashboard");
@@ -57,11 +65,25 @@ export default function SetView(props) {
     const getUserSet = async () => {
       try {
         const set = await setService.getUserSetById(currLoc.setid);
+        console.log(set)
         setCurrentSet(set);
         setLoading(false);
       } catch (err) {
-        // redirect to not found page
-        navigate("/notfound")
+        // redirect to error page after updating status and message
+
+        const errorStr = err.response.data.error.split("|")
+
+        const errStatus = errorStr[0];
+        const errMsg = errorStr[1];
+
+        console.log(err)
+        
+        errObjUpdate({status: errStatus, message: errMsg});
+        setError(true)
+        setLoading(false)
+        
+        // navigate(0)
+
       }
       
     };
@@ -69,7 +91,8 @@ export default function SetView(props) {
   }, []);
 
   return (
-    <Wrapper className={loading ? "loading" : ""}>
+    <>{error && <ErrorModal></ErrorModal>}
+    <Wrapper className={loading || error ? "loading" : ""}>
       <div className={` ${loading ? "loading-spinner-container" : ""}`}>
         <Oval
           visible={loading}
@@ -82,6 +105,8 @@ export default function SetView(props) {
           className="spinner"
         />
       </div>
+
+      
 
       <Sidebar className="spaced">
         <div className="sidebar__group">
@@ -120,12 +145,12 @@ export default function SetView(props) {
           <div className="card-inner">
             <div className="card-front">
               <span data-testid={`card-term${flipped ? "-hidden" : ""}`}>
-                {!loading && currentSet.setCards[cardIndex].term}
+                {!loading && !error && currentSet.setCards[cardIndex].term}
               </span>
             </div>
             <div className="card-back">
               <span data-testid={`card-definition${flipped ? "" : "-hidden"}`}>
-                {!loading && currentSet.setCards[cardIndex].definition}
+                {!loading && !error && currentSet.setCards[cardIndex].definition}
               </span>
             </div>
           </div>
@@ -139,5 +164,7 @@ export default function SetView(props) {
         </div>
       </div>
     </Wrapper>
+    </>
   );
+  
 }

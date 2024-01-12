@@ -15,6 +15,7 @@ import Login from "./components/views/Login/Login";
 
 import NotFound from "./components/views/NotFound/NotFound";
 
+
 const Container = styled.div`
   a {
     color: ${props => props.theme.colors.primary};
@@ -127,13 +128,17 @@ export default function AppContainer() {
         </Container>
       )
     },
-    {
-      path: "/notfound",
-      element: <NotFound />
-    },
+    // {
+    //   path: "/notfound",
+    //   element: <Container><NotFound /></Container>
+    // },
+    // {
+    //   path: "/error",
+    //   element: <Container><ErrorPage /></Container>
+    // },
     {
       path: "*",
-      element: <NotFound />
+      element: <Container><NotFound /></Container>
     }
   ]);
 
