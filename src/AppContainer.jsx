@@ -128,6 +128,19 @@ export default function AppContainer() {
         </Container>
       )
     },
+    {
+      path: "/edit",
+      element: (
+        <Container>
+          {auth.user !== null && <CreateSet editMode={true} />}
+          {auth.user === null && auth.loading === false && (
+            <p className="unauthorized" data-testid="unauthorized">
+              Unauthorized access - please <Link to="/login">log in</Link>.
+            </p>
+          )}
+        </Container>
+      )
+    },
     // {
     //   path: "/notfound",
     //   element: <Container><NotFound /></Container>

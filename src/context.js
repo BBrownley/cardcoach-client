@@ -76,3 +76,38 @@ export const ErrorProvider = ({children}) => {
     </ErrorContext.Provider>
   )
 }
+
+// Flashcard set edit mode context
+
+const EditModeContext = createContext();
+const EditModeUpdateContext = createContext();
+
+// Flashcard set state context (contains an object representing the original state of the currently edited set)
+
+const EditSetStateContext = createContext();
+const EditSetStateUpdateContext = createContext();
+
+export const useEditMode = () => useContext(EditModeContext);
+export const useEditModeUpdate = () => useContext(EditModeUpdateContext);
+
+// Stores the original state of the set we're editing
+export const useEditSetState = () => useContext(EditSetStateContext);
+export const useEditSetStateUpdate = () => useContext(EditSetStateUpdateContext);
+
+export const SetEditProvider = ({children}) => {
+
+  const [editMode, setEditMode] = useState(false);
+  const [originalSetState, setOriginalSetState] = useState({title: "", description: "", cards: []});
+
+  return (
+    <EditModeContext.Provider value={editMode}>
+      <EditModeUpdateContext.Provider value={setEditMode}>
+        <EditSetStateContext.Provider value={originalSetState}>
+          <EditSetStateUpdateContext.Provider value={setOriginalSetState}>
+            {children}
+          </EditSetStateUpdateContext.Provider>
+        </EditSetStateContext.Provider>
+      </EditModeUpdateContext.Provider>
+    </EditModeContext.Provider>
+  )
+}

@@ -3,7 +3,7 @@
   flashcard Sets.
 */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Container, ImportTermsButton } from "./CreateSet.elements";
@@ -19,8 +19,11 @@ import SetCards from "./SetCards/SetCards";
 
 import setsService from "../../../services/sets";
 
+import { useEditMode, useEditModeUpdate, useEditSetState } from "../../../context";
+
 export default function CreateSet() {
   const navigate = useNavigate();
+  const updateEditMode = useEditModeUpdate();
 
   // Card set title and desc
   const [title, setTitle] = useState("");
@@ -37,6 +40,21 @@ export default function CreateSet() {
 
   // Array of term objects to be imported from ImportTermsTextArea component
   const [termsToImport, setTermsToImport] = useState([]);
+
+  // determines if the form is in edit mode
+  const editing = useEditMode();
+
+  // the original state of the set before opening this view in edit mode
+  const originalSetBeforeEdit = useEditSetState();
+
+  useEffect(() => {
+    // prepopulate input fields if in edit mode
+    if (editing) {
+      setTitle(originalSetBeforeEdit.setTitle);
+      setDescription(originalSetBeforeEdit.setDesc);
+      setCards(originalSetBeforeEdit.setCards);
+    }
+  }, [])
 
   /**
    * Adds a new, blank card to the set
@@ -111,7 +129,8 @@ export default function CreateSet() {
     }, 200);
   };
 
-  const goToDashboard = () => {
+  const cancel = () => {
+    updateEditMode(false); // reset edit mode to false, the default value
     navigate("/dashboard");
   };
 
@@ -127,10 +146,10 @@ export default function CreateSet() {
   return (
     <Container>
       <Sidebar>
-        <div className="sidebar__group active">Create flashcard set</div>
+        <div className="sidebar__group active">{editing ? "Edit" : "Create"} flashcard set</div>
         <div className="sidebar__group sidebar__group--space-around">
-          <button onClick={createSet} data-testid="submit-set">Create</button>
-          <button onClick={goToDashboard}>Cancel</button>
+          <button onClick={createSet} data-testid="submit-set">{editing ? "Update" : "Create"}</button>
+          <button onClick={cancel}>Cancel</button>
         </div>
         <div className="sidebar__group">Skip mastered terms: On</div>
         <div className="sidebar__group">Mastery level req.: 10</div>
@@ -140,7 +159,7 @@ export default function CreateSet() {
           <button className="create" onClick={createSet}>
             Create
           </button>
-          <button onClick={goToDashboard}>Cancel</button>
+          <button onClick={cancel}>Cancel</button>
         </div>
         <div className="sidebar__group">
           <div className="skip-mastered-terms">Skip mastered terms: On</div>

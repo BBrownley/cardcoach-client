@@ -17,7 +17,7 @@ import { Wrapper } from "./SetView.elements.js";
 
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 
-import {useError, useErrorUpdate} from "../../../context.js"
+import {useError, useErrorUpdate, useEditModeUpdate, useEditSetStateUpdate} from "../../../context.js"
 
 import ErrorModal from "../ErrorPage/ErrorModal.jsx";
 
@@ -37,6 +37,8 @@ export default function SetView(props) {
 
   const errObj = useError();
   const errObjUpdate = useErrorUpdate();
+  const updateEditMode = useEditModeUpdate();
+  const storeOriginalSetState = useEditSetStateUpdate()
 
   const navigateToDashboard = () => {
     navigate("/dashboard");
@@ -60,6 +62,12 @@ export default function SetView(props) {
     setFlipped(false);
     setHasFlipped(false);
   };
+
+  const goToEditSet = () => {
+    updateEditMode(true); // toggle edit mode for the form
+    storeOriginalSetState(currentSet);
+    navigate("/edit");
+  }
 
   useEffect(() => {
     const getUserSet = async () => {
@@ -110,7 +118,7 @@ export default function SetView(props) {
 
       <Sidebar className="spaced">
         <div className="sidebar__group">
-          <div className="sidebar__group__el--m2">Add flashcard</div>
+          <div className="sidebar__group__el--m2" onClick={goToEditSet}>Edit set</div>
           <div className="sidebar__group__el--m2">Shuffle set</div>
           <div className="sidebar__group__el--m2">Matching mode</div>
         </div>

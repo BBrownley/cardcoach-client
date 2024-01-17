@@ -2,7 +2,7 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "./theme";
 import "./App.css";
 
-import { AuthProvider, ErrorProvider } from "./context";
+import { AuthProvider, ErrorProvider, SetEditProvider } from "./context";
 
 import AppContainer from "./AppContainer";
 
@@ -11,7 +11,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <AuthProvider>
         <ErrorProvider>
-          <AppContainer />
+          <SetEditProvider>
+            <AppContainer />
+          </SetEditProvider>
         </ErrorProvider>
       </AuthProvider>
     </ThemeProvider>
