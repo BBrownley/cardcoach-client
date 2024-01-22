@@ -35,13 +35,28 @@ const getUserSetById = async setId => {
     console.log(error);
     throw error;
   }
- 
 };
+
+// updates a set with new information
+const updateSet = async (updatedTitle, updatedDescription, updatedCards, setId) => {
+
+  const payload = {updatedTitle, updatedDescription, updatedCards};
+
+  try {
+    const res = await axios.put(`${baseUrl}/sets/${setId}`, payload, config);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return;
+}
 
 const setsService = {
   create,
   getUserSets,
-  getUserSetById
+  getUserSetById,
+  updateSet
 };
 
 export default setsService;

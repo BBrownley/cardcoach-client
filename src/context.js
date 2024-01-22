@@ -97,7 +97,7 @@ export const useEditSetStateUpdate = () => useContext(EditSetStateUpdateContext)
 export const SetEditProvider = ({children}) => {
 
   const [editMode, setEditMode] = useState(false);
-  const [originalSetState, setOriginalSetState] = useState({title: "", description: "", cards: []});
+  const [originalSetState, setOriginalSetState] = useState({title: "", description: "", cards: [], setId: null});
 
   return (
     <EditModeContext.Provider value={editMode}>

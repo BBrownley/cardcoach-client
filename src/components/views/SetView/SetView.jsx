@@ -65,7 +65,7 @@ export default function SetView(props) {
 
   const goToEditSet = () => {
     updateEditMode(true); // toggle edit mode for the form
-    storeOriginalSetState(currentSet);
+    storeOriginalSetState({...currentSet, setId: currLoc.setid});
     navigate("/edit");
   }
 

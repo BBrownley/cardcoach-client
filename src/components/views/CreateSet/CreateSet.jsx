@@ -32,6 +32,22 @@ export default function CreateSet() {
   // ID that will be assigned to the next created card
   const [cardCreationID, setCardCreationID] = useState(2);
 
+  /*
+    Design problem: How do we ensure that any new cards submitted to the backend do not contain
+    duplicate card IDs? - Just using this default creation ID will almost guarantee duplication at some point
+
+    So we need some way to give newly created cards a unique ID while in edit mode
+
+    note: while in create mode, the backend ignores frontend-assigned IDs in favor of SQL auto-assigned value
+          in edit mode, we must use the backend-provided IDs for a more efficient query
+
+    ---
+
+    One solution would be to assign a "new" property to any newly created cards in edit mode, and set it to true.
+    We will have the backend read in this property, and have the database assign an auto-assigned ID if "new"
+
+  */
+
   // Proposed set of cards to be created
   const [cards, setCards] = useState([{ id: 1, term: "", definition: "" }]);
 
@@ -53,6 +69,7 @@ export default function CreateSet() {
       setTitle(originalSetBeforeEdit.setTitle);
       setDescription(originalSetBeforeEdit.setDesc);
       setCards(originalSetBeforeEdit.setCards);
+      setCardCreationID(originalSetBeforeEdit.setCards[originalSetBeforeEdit.setCards.length - 1].id + 1);
     }
   }, [])
 
@@ -60,7 +77,16 @@ export default function CreateSet() {
    * Adds a new, blank card to the set
    */
   const addNewCard = () => {
-    setCards([...cards, { id: cardCreationID, term: "", definition: "" }]);
+
+    const cardToAdd = { id: cardCreationID, term: "", definition: "" };
+
+    if (editing) { 
+      // if form is in edit mode
+      // assign a "new" property to differentiate between cards to be replaced in DB and completely new cards
+      cardToAdd["new"] = true; 
+    }
+
+    setCards([...cards, cardToAdd]);
     setCardCreationID(cardCreationID + 1);
 
     // scroll to bottom after a short delay
@@ -92,7 +118,10 @@ export default function CreateSet() {
    * Deletes a card from the set
    */
   const deleteCard = deletionID => {
+    console.log(cards)
+    console.log(deletionID)
     setCards(cards.filter(card => card.id !== deletionID));
+    console.log(cards)
   };
 
   /**
@@ -143,12 +172,24 @@ export default function CreateSet() {
     }
   };
 
+  const submitEditSet = async () => {
+
+    const setId = originalSetBeforeEdit.setId;
+
+    const res = await setsService.updateSet(title, description, cards, setId);
+    if (res?.error) {
+      console.log(res.error); // TODO: generate error toast
+    } else {
+      navigate(`/dashboard/${setId}`);
+    }
+  }
+
   return (
     <Container>
       <Sidebar>
         <div className="sidebar__group active">{editing ? "Edit" : "Create"} flashcard set</div>
         <div className="sidebar__group sidebar__group--space-around">
-          <button onClick={createSet} data-testid="submit-set">{editing ? "Update" : "Create"}</button>
+          <button onClick={editing ? submitEditSet : createSet} data-testid="submit-set">{editing ? "Update" : "Create"}</button>
           <button onClick={cancel}>Cancel</button>
         </div>
         <div className="sidebar__group">Skip mastered terms: On</div>
